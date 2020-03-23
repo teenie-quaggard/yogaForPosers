@@ -3,12 +3,18 @@
  */
 package space.jaggard.yogaforposers;
 
+import space.jaggard.yogaforposers.io.Console;
+import space.jaggard.yogaforposers.io.IO;
+import space.jaggard.yogaforposers.program.Program;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        IO ioType = new Console();
+        Program.go(ioType);
+    }
+
+    public String isRunning(){
+        return "App is running!";
     }
 }
