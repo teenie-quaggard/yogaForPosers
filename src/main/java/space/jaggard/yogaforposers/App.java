@@ -3,15 +3,13 @@
  */
 package space.jaggard.yogaforposers;
 
-import space.jaggard.yogaforposers.io.Console;
-import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.program.Program;
 
 public class App {
 
     public static void main(String[] args) {
-        IO ioType = new Console();
-        Program.go(ioType);
+        Program program = new Program();
+        program.go();
     }
 
     public String isRunning(){
