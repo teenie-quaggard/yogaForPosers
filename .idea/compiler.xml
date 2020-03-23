@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="ddddddddddddd.main" target="11" />
+      <module name="ddddddddddddd.test" target="11" />
+      <module name="yoga-for-posers.main" target="11" />
+      <module name="yoga-for-posers.test" target="11" />
+      <module name="yoga.main" target="11" />
+      <module name="yoga.test" target="11" />
+      <module name="yogaForPosers.main" target="11" />
+      <module name="yogaForPosers.test" target="11" />
+      <module name="yogi-app.main" target="11" />
+      <module name="yogi-app.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
