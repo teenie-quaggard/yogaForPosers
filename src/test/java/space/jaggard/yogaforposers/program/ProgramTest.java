@@ -26,7 +26,7 @@ class ProgramTest {
         String stringToPrint = "Hello world!";
 
         Program program = new Program(console, null);
-        program.output(console, stringToPrint);
+        program.output(stringToPrint);
 
         assertEquals(stringToPrint + "\n", output.toString());
     }
@@ -50,13 +50,14 @@ class ProgramTest {
 //
 //
 //        Program program = new Program(console, null);
+//        program.createEntry();
 //        assertEquals("\n---------------------------------------------\n" +
 //                "ENGLISH NAME: Pigeon Pose\n" +
 //                "SANSKRIT NAME: Eka Pada Rajakapotasana\n"+
 //                "POSE TYPE: Hip opener\n"+
 //                "HEALTH BENEFITS: Opens the hip joint" +
 //                "\n---------------------------------------------\n",
-//                program.createEntry(console));
+//               program.getEntryFromData(0));
 //    }
 
     @Test void printListPrintsNumberedList(){
@@ -68,7 +69,7 @@ class ProgramTest {
         ArrayList<String> list = new ArrayList<>(Arrays.asList("Item 1", "Item " +
                 "2", "Item X"));
         Program program = new Program(console, null);
-        program.printList(console, list);
+        program.listData(list);
 
         assertEquals("1.\nItem 1\n" +
                 "2.\nItem 2\n" +
@@ -89,6 +90,33 @@ class ProgramTest {
         program.addEntry(newEntry);
 
         assertEquals(Arrays.asList("Item A", "Item X", "Item " +
-                "Y", "Item Z"), program.getList());
+                "Y", "Item Z"), program.getData());
+    }
+
+    @Test void getDataReturnsTheListOfAnySavedEntries(){
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(output);
+        InputStream in =
+                new ByteArrayInputStream("".getBytes());
+        Console console = new Console(in, out);
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("Item X", "Item " +
+                "Y", "Item Z"));
+        Program program = new Program(console, list);
+
+        assertEquals(Arrays.asList("Item X", "Item " +
+                "Y", "Item Z"), program.getData());
+    }
+
+    @Test void getEntryFromDataTakesAnIndexAndReturnsEntryFromListAtThatIndex(){
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(output);
+        InputStream in =
+                new ByteArrayInputStream("".getBytes());
+        Console console = new Console(in, out);
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("Item X", "Item " +
+                "Y", "Item Z"));
+        Program program = new Program(console, list);
+
+        assertEquals("Item X", program.getEntryFromData(0));
     }
 }

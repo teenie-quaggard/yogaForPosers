@@ -25,52 +25,88 @@ public class Program {
     }
 
     public void go(){
-        output(ioType, Messages.GREETING.send());
-        output(ioType, Messages.INSTRUCTIONS.send());
-        output(ioType, Messages.MENU.send());
-        output(ioType, Messages.EMPTY_LIST.send());
-        String entry = createEntry(ioType);
-        addEntry(entry);
-        printList(ioType, data);
+        output(Messages.GREETING.send());
+        output(Messages.INSTRUCTIONS.send());
+
+        while (isRunning) {
+            output(Messages.MENU.send());
+            String input = ioType.getInput();
+            selectAction(input);
+        }
+
     }
 
+    public void selectAction(String userInput){
+        switch(userInput){
+            case "-add":
+                createEntry();
+                break;
+            case "-view":
+                listData(data);
+                break;
+            case "-exit":
+                exitProgram();
+                break;
+            default:
+                output(Messages.ERR_WRONG_COMMAND.send());
+                output(Messages.MENU.send());
+                break;
+        }
+    }
 
-    public String createEntry(IO ioType){
+    public void createEntry(){
 
-        output(ioType, Messages.ADD_BEGIN.send());
+        output(Messages.ADD_BEGIN.send());
 
-        output(ioType, Messages.ADD_ENGLISH_NAME.send());
+        output(Messages.ADD_ENGLISH_NAME.send());
         String englishName = ioType.getInput();
 
-        output(ioType, Messages.ADD_SANSKRIT_NAME.send());
+        output(Messages.ADD_SANSKRIT_NAME.send());
         String sanskritName = ioType.getInput();
 
-        output(ioType, Messages.ADD_POSE_TYPE.send());
+        output(Messages.ADD_POSE_TYPE.send());
         String poseType = ioType.getInput();
 
-        output(ioType, Messages.ADD_BENEFITS.send());
+        output(Messages.ADD_BENEFITS.send());
         String benefits = ioType.getInput();
 
-        return new Entry(englishName, sanskritName, poseType, benefits).create();
-    }
+        String entry =
+                new Entry(englishName, sanskritName, poseType, benefits).create();
 
-    public void printList(IO ioType, ArrayList<String> data) {
-        for (String entry : data) {
-            output(ioType, (data.indexOf(entry) + 1) + ".");
-            output(ioType, entry);
-        }
+        addEntry(entry);
     }
 
     public void addEntry(String entry){
         data.add(0, entry);
-        output(ioType, Messages.ADD_END.send());
+        output(Messages.ADD_END.send());
+        listData(data);
     }
 
-    public void output(IO ioType, String message){
+    public void listData (ArrayList<String> data) {
+        if (data.isEmpty()) {
+            output(Messages.EMPTY_LIST.send());
+        } else {
+            for (String entry : data) {
+                output((data.indexOf(entry) + 1) + ".");
+                output(entry);
+            }
+        }
+    }
+
+    public void exitProgram(){
+        output(Messages.EXIT.send());
+        System.exit(0);
+    }
+
+    public void output(String message){
         ioType.print(message);
     }
 
-    public ArrayList<String> getList(){
+    public ArrayList<String> getData(){
         return data;
+    }
+
+    public String getEntryFromData(int index){
+        return data.get(index);
     }
 }
