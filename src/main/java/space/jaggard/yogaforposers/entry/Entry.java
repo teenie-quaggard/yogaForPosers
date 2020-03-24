@@ -20,7 +20,7 @@ public class Entry {
     }
 
     public String create(){
-        return "\n---------------------------------------------\n" +
+        return "---------------------------------------------\n" +
                 "ENGLISH NAME: " + englishName + "\n" +
                 "SANSKRIT NAME: " + sanskritName + "\n"+
                 "POSE TYPE: " + poseType + "\n"+

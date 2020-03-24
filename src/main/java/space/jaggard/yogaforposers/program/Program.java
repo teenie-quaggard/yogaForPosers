@@ -9,14 +9,17 @@ import java.util.ArrayList;
 
 public class Program {
 
+    Boolean isRunning;
     IO ioType;
     ArrayList<String> data;
+
 
     public Program(){
        this(new Console(), new ArrayList<>());
     }
 
     public Program(IO ioType, ArrayList<String> data){
+        this.isRunning = true;
         this.ioType = ioType;
         this.data = data;
     }
@@ -26,8 +29,11 @@ public class Program {
         output(ioType, Messages.INSTRUCTIONS.send());
         output(ioType, Messages.MENU.send());
         output(ioType, Messages.EMPTY_LIST.send());
-        ioType.getInput();
+        String entry = createEntry(ioType);
+        addEntry(entry);
+        printList(ioType, data);
     }
+
 
     public String createEntry(IO ioType){
 
@@ -48,7 +54,23 @@ public class Program {
         return new Entry(englishName, sanskritName, poseType, benefits).create();
     }
 
+    public void printList(IO ioType, ArrayList<String> data) {
+        for (String entry : data) {
+            output(ioType, (data.indexOf(entry) + 1) + ".");
+            output(ioType, entry);
+        }
+    }
+
+    public void addEntry(String entry){
+        data.add(0, entry);
+        output(ioType, Messages.ADD_END.send());
+    }
+
     public void output(IO ioType, String message){
         ioType.print(message);
+    }
+
+    public ArrayList<String> getList(){
+        return data;
     }
 }

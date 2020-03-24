@@ -2,6 +2,7 @@ package space.jaggard.yogaforposers.io;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Console implements IO {

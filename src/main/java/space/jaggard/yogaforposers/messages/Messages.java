@@ -15,10 +15,10 @@ public enum Messages {
     EMPTY_LIST("At the moment, you do not have any saved yoga poses. When " +
             "you're ready to add one to your list, type '-add':"),
     ADD_BEGIN("Great! Let's add to your favourite yoga poses.\n"),
-    ADD_ENGLISH_NAME("What's the english name for the pose? : "),
-    ADD_SANSKRIT_NAME("What's the Sanskrit name for the pose? : "),
-    ADD_POSE_TYPE("What's the pose type? : "),
-    ADD_BENEFITS("Finally, what health benefits does the pose have? : "),
+    ADD_ENGLISH_NAME("What's the english name for the pose?: "),
+    ADD_SANSKRIT_NAME("What's the Sanskrit name for the pose?: "),
+    ADD_POSE_TYPE("What's the pose type?: "),
+    ADD_BENEFITS("Finally, what health benefits does the pose have?: "),
     ADD_END("Thanks! Here's what you have saved to your list: \n")
     ;
 
