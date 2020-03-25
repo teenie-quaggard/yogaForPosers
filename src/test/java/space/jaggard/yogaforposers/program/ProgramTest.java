@@ -20,7 +20,7 @@ class ProgramTest {
     }
 
     @Test
-    void outputPrintsAMessageWhenPassedOne(){
+    void outputStringPrintsAStringeWhenPassedOne(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in = new ByteArrayInputStream("".getBytes());
@@ -28,13 +28,14 @@ class ProgramTest {
         String stringToPrint = "Hello world!";
 
         Program program = new Program(console, null);
-        program.output(stringToPrint);
+        program.outputString(stringToPrint);
 
         assertEquals(stringToPrint + "\n", output.toString());
     }
 
 
-//    @Test void createEntryStringTakesUserInputAndReturnsStringifiedEntryData(){
+//    @Test
+//    void createEntryStringTakesUserInputAndReturnsStringifiedEntryData(){
 //        ByteArrayOutputStream output = new ByteArrayOutputStream();
 //        PrintStream out = new PrintStream(output);
 //
@@ -63,7 +64,8 @@ class ProgramTest {
 //                program.createEntryString());
 //    }
 
-    @Test void listDataPrintsNumberedList(){
+    @Test
+    void listDataPrintsNumberedList(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -74,12 +76,16 @@ class ProgramTest {
         Program program = new Program(console, null);
         program.listData(list);
 
-        assertEquals("1.\nItem 1\n" +
-                "2.\nItem 2\n" +
-                "3.\nItem X\n", output.toString());
+        assertTrue(output.toString().contains("1.\n" +
+                "Item 1\n" +
+                "2.\n" +
+                "Item 2\n" +
+                "3.\n" +
+                "Item X\n"));
     }
 
-    @Test void addEntryAddsNewEntryToBeginningOfList(){
+    @Test
+    void addEntryAddsNewEntryToBeginningOfList(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -90,13 +96,14 @@ class ProgramTest {
         Program program = new Program(console, list);
         String newEntry = "Item A";
 
-        program.addEntry(newEntry);
+        program.addEntryToData(newEntry);
 
         assertEquals(Arrays.asList("Item A", "Item X", "Item " +
                 "Y", "Item Z"), program.getData());
     }
 
-    @Test void getDataReturnsTheListOfAnySavedEntries(){
+    @Test
+    void getDataReturnsTheListOfAnySavedEntries(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -135,14 +142,14 @@ class ProgramTest {
                 "Y", "Item Z"));
         Program program = new Program(console, list);
 
-        program.deleteEntry("2");
+        program.deleteEntryFromData("2");
 
         assertEquals(Arrays.asList("Item X", "Item Z"), program.getData());
     }
 
 
     @Test
-    void printsAndGetsInputReturnsUserInput(){
+    void getInputReturnsUserInput(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         String input = "Pigeon Pose";
@@ -156,7 +163,8 @@ class ProgramTest {
     }
 
 
-    @Test void parseArgumentsShouldTakeInUserInputAndReturnAnArraySeparatingUserCommandsFromArguments(){
+    @Test
+    void parseArgumentsShouldTakeInUserInputAndReturnAnArraySeparatingUserCommandsFromArguments(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -164,8 +172,32 @@ class ProgramTest {
         Console console = new Console(in, out);
         Program program = new Program(console, null);
 
-        String[] parsedArguments = program.parseArguments("-delete 2");
+        String[] parsedArguments = program.parse("-delete 2");
 
         assertEquals("-delete", parsedArguments[0]);
-        assertEquals("2", parsedArguments[1]);}
+        assertEquals("2", parsedArguments[1]);
+    }
+
+//    @Test
+//    void editEntryDisplaysSelectedEntry(){
+//        ByteArrayOutputStream output = new ByteArrayOutputStream();
+//        PrintStream out = new PrintStream(output);
+//        InputStream in =
+//                new ByteArrayInputStream("Y\n1\n".getBytes());
+//        Console console = new Console(in, out);
+//        ArrayList<String> list = new ArrayList<>(Arrays.asList("Item X", "Item " +
+//                "Y", "Item Z"));
+//        Program program = new Program(console, list);
+//
+//        program.editEntry("1");
+//
+//        String reviewEntryPrompt = Messages.REVIEW_ENTRY_PROMPT.stringify();
+//        String editPrompt = Messages.EDIT_PROMPT.stringify();
+//        String editField = Messages.EDIT_FIELD.stringify();
+//
+//        assertEquals(reviewEntryPrompt + "\nItem X\n" + editPrompt + "\n" + editField + "\n",
+//                output.toString());
+//    }
+
+
 }

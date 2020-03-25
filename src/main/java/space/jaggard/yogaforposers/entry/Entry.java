@@ -18,7 +18,6 @@ public class Entry {
         this.healthBenefits = healthBenefits;
         this.id = UUID.randomUUID();
     }
-    
 
     public String create(){
         return "---------------------------------------------\n" +
@@ -29,5 +28,8 @@ public class Entry {
                 "\n---------------------------------------------\n";
     }
 
+//    public void edit(String field, String newInfo){
+//        field = newInfo;
+//    };
 
 }

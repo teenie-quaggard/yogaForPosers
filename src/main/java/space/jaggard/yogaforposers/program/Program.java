@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Program {
 
-    boolean isRunning;
+    boolean running;
     IO ioType;
     ArrayList<String> data;
 
@@ -18,63 +18,118 @@ public class Program {
     }
 
     public Program(IO ioType, ArrayList<String> data){
-        this.isRunning = true;
+        this.running = true;
         this.ioType = ioType;
         this.data = data;
     }
 
     public void go(){
-        output(Messages.GREETING.send());
-        output(Messages.INTRO.send());
+        output(Messages.GREETING);
+        output(Messages.INTRO);
 
-        while (isRunning) {
-            String input = getInput(Messages.MENU);
-            String[] parsedInput = parseArguments(input);
-            selectAction(parsedInput);
+        while (running) {
+            tick();
         }
     }
 
-    public String[] parseArguments(String userInput){
-        String input = trimWhitespace(userInput);
-        return input.split(" ");
- }
+    public void tick(){
+        String input = getInput(Messages.MENU);
+        String[] parsedInput = parse(input);
+        selectCommand(parsedInput);
+    }
 
-    public void selectAction(String[] parsedInput){
-        String command = parsedInput[0];
-        String argument = null;
+    public void selectCommand(String[] parsedInput){
 
+        String entryIndex = null;
         if (parsedInput.length == 2) {
-            argument = parsedInput[1];
+            entryIndex = parsedInput[1];
         }
 
+        String command = uppercaseInput(parsedInput[0]);
+
         switch(command){
-            case "-add":
-                newEntry();
+            case "-ADD":
+                addsNewEntry();
                 break;
-            case "-view":
+            case "-LIST":
                 listData(data);
                 break;
-            case "-delete":
-                deleteEntry(argument);
+            case "-EDIT":
+                editEntry(entryIndex);
                 break;
-            case "-exit":
+            case "-DEL":
+                deleteEntry(entryIndex);
+                break;
+            case "-EXIT":
                 exitProgram();
                 break;
             default:
-                output(Messages.ERR_WRONG_COMMAND.send());
-                output(Messages.MENU.send());
+                output(Messages.ERR_WRONG_COMMAND);
                 break;
         }
     }
 
-    public void newEntry(){
-        output(Messages.ADD_BEGIN.send());
-        String entry = createEntryString();
-        addEntry(entry);
+    public void addsNewEntry(){
+        output(Messages.ADD_PROMPT);
+        String entry = createEntry();
+        addEntryToData(entry);
         listData(data);
     }
 
-    public String createEntryString(){
+    public void listData(ArrayList<String> data) {
+        if (data.isEmpty()) {
+            output(Messages.EMPTY_LIST);
+        } else {
+            output(Messages.LIST);
+            prependDataWithNumber(data);
+        }
+    }
+
+    public void editEntry(String userInput){
+        output(Messages.REVIEW_ENTRY_PROMPT);
+        displayEntry(userInput);
+        String input = getInput(Messages.EDIT_PROMPT);
+
+        if (input.equals("Y")) {
+           String field = getInput(Messages.EDIT_FIELD);
+        } else {
+            output(Messages.EDIT_WRONG_ENTRY);
+            listData(data);
+        }
+    }
+//
+//    public void editField(String field){
+//        switch(field){
+//            case "1":
+//                break;
+//            case "2":
+//                break;
+//            case "3":
+//                break;
+//            case "4":
+//                break;
+//        }
+//    }
+
+
+    public void deleteEntry(String userInput){
+        output(Messages.REVIEW_ENTRY_PROMPT);
+        displayEntry(userInput);
+        String input = getInput(Messages.DELETE_ENTRY);
+        if (input.equals("Y")) {
+            deleteEntryFromData(userInput);
+            output(Messages.CONFIRM_DELETE);
+        } else {
+            output(Messages.UNCONFIRMED_DELETE);
+        }
+    }
+
+    public void exitProgram(){
+        output(Messages.EXIT);
+        System.exit(0);
+    }
+
+    public String createEntry(){
         String englishName = getInput(Messages.ADD_ENGLISH_NAME);
         String sanskritName = getInput(Messages.ADD_SANSKRIT_NAME);
         String poseType = getInput(Messages.ADD_POSE_TYPE);
@@ -82,36 +137,34 @@ public class Program {
         return new Entry(englishName, sanskritName, poseType, benefits).create();
     }
 
-    public void addEntry(String entry){
+    public void addEntryToData(String entry){
         data.add(0, entry);
-        output(Messages.ADD_END.send());
+        output(Messages.ADD_FINISHED);
     }
 
-    public void listData (ArrayList<String> data) {
-        if (data.isEmpty()) {
-            output(Messages.EMPTY_LIST.send());
-        } else {
-           prependsDataWithListNumber(data);
-        }
-    }
-
-    public void deleteEntry(String userInput){
-        int index = Integer.parseInt(userInput) - 1;
+    public void deleteEntryFromData(String userInput){
+        int index = convertToIndex(userInput);
         data.remove( index );
     }
 
-    public void exitProgram(){
-        output(Messages.EXIT.send());
-        System.exit(0);
+    public void displayEntry(String userInput){
+        int index = convertToIndex(userInput);
+        String entry = getEntryFromData(index);
+        outputString(entry);
     }
 
     public String getInput(Messages message){
-        output(message.send());
+        output(message);
         return ioType.getInput();
     }
 
-    public void output(String message){
-        ioType.print(message);
+    public void output(Messages message){
+        String string = message.stringify();
+        ioType.print(string);
+    }
+
+    public void outputString(String string){
+        ioType.print(string);
     }
 
     public ArrayList<String> getData(){
@@ -122,15 +175,29 @@ public class Program {
         return data.get(index);
     }
 
+    public String[] parse(String userInput){
+        String input = trimWhitespace(userInput);
+        return input.split(" ");
+    }
+
+    private String uppercaseInput(String userInput){
+        return userInput.toUpperCase();
+    }
+
+    private int convertToIndex(String input){
+        return Integer.parseInt(input) - 1;
+    }
+
     private String trimWhitespace(String string) {
         return string.trim();
     }
 
-    private void prependsDataWithListNumber(ArrayList<String> data){
+    private void prependDataWithNumber(ArrayList<String> data){
         for (String entry : data) {
-            output((data.indexOf(entry) + 1) + ".");
-            output(entry);
+            outputString((data.indexOf(entry) + 1) + ".");
+            outputString(entry);
         }
     }
+
 
 }
