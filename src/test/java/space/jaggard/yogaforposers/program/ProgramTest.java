@@ -2,6 +2,7 @@ package space.jaggard.yogaforposers.program;
 
 import org.junit.jupiter.api.Test;
 import space.jaggard.yogaforposers.io.Console;
+import space.jaggard.yogaforposers.messages.Messages;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,7 +32,8 @@ class ProgramTest {
         assertEquals(stringToPrint + "\n", output.toString());
     }
 
-//    @Test void createEntryTakesUserInputAndReturnsStringifiedEntryData(){
+
+//    @Test void createEntryStringTakesUserInputAndReturnsStringifiedEntryData(){
 //        ByteArrayOutputStream output = new ByteArrayOutputStream();
 //        PrintStream out = new PrintStream(output);
 //
@@ -45,22 +47,22 @@ class ProgramTest {
 //                + benefits + System.lineSeparator();
 //
 //        InputStream in =
-//                new ByteArrayInputStream(userInput.getBytes());
+//                new ByteArrayInputStream(englishName.getBytes());
 //        Console console = new Console(in, out);
 //
 //
 //        Program program = new Program(console, null);
-//        program.createEntry();
+//
 //        assertEquals("\n---------------------------------------------\n" +
 //                "ENGLISH NAME: Pigeon Pose\n" +
 //                "SANSKRIT NAME: Eka Pada Rajakapotasana\n"+
 //                "POSE TYPE: Hip opener\n"+
 //                "HEALTH BENEFITS: Opens the hip joint" +
 //                "\n---------------------------------------------\n",
-//               program.getEntryFromData(0));
+//                program.createEntryString());
 //    }
 
-    @Test void printListPrintsNumberedList(){
+    @Test void listDataPrintsNumberedList(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -119,4 +121,45 @@ class ProgramTest {
 
         assertEquals("Item X", program.getEntryFromData(0));
     }
+
+    @Test void deleteEntryShouldRemoveAnEntryFromTheDataList(){
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(output);
+        InputStream in =
+                new ByteArrayInputStream("".getBytes());
+        Console console = new Console(in, out);
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("Item X", "Item " +
+                "Y", "Item Z"));
+        Program program = new Program(console, list);
+
+        program.deleteEntry(2);
+
+        assertEquals(Arrays.asList("Item X", "Item Z"), program.getData());
+    }
+
+
+    @Test void printsAndGetsInputReturnsUserInput(){
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(output);
+        String input = "Pigeon Pose";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        Console console = new Console(in, out);
+
+        Program program = new Program(console, null);
+        Messages message = Messages.ADD_ENGLISH_NAME;
+
+        assertEquals(input, program.printsAndGetsInput(message));
+    }
+
+//
+//    @Test void getUserArgumentsShouldTakeInUserInputAndReturnAnArraySeparatingCommandFromArgument(){
+//        ByteArrayOutputStream output = new ByteArrayOutputStream();
+//        PrintStream out = new PrintStream(output);
+//        InputStream in =
+//                new ByteArrayInputStream("".getBytes());
+//        Console console = new Console(in, out);
+//        Program program = new Program(console, null);
+//
+//        program.(2);
+//    }
 }

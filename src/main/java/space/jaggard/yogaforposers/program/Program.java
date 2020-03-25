@@ -29,21 +29,26 @@ public class Program {
         output(Messages.INSTRUCTIONS.send());
 
         while (isRunning) {
-            output(Messages.MENU.send());
-            String input = ioType.getInput();
+            String input = printsAndGetsInput(Messages.MENU);
             selectAction(input);
         }
-
     }
 
     public void selectAction(String userInput){
+//        String[] arr = userInput.split(" ", 2);
+//        String command = arr[0];
+//        int index = Integer.parseInt(arr[1]);
+
         switch(userInput){
             case "-add":
-                createEntry();
+                newEntry();
                 break;
             case "-view":
                 listData(data);
                 break;
+//            case "-delete":
+//                deleteEntry(index);
+//                break;
             case "-exit":
                 exitProgram();
                 break;
@@ -54,32 +59,24 @@ public class Program {
         }
     }
 
-    public void createEntry(){
-
+    public void newEntry(){
         output(Messages.ADD_BEGIN.send());
-
-        output(Messages.ADD_ENGLISH_NAME.send());
-        String englishName = ioType.getInput();
-
-        output(Messages.ADD_SANSKRIT_NAME.send());
-        String sanskritName = ioType.getInput();
-
-        output(Messages.ADD_POSE_TYPE.send());
-        String poseType = ioType.getInput();
-
-        output(Messages.ADD_BENEFITS.send());
-        String benefits = ioType.getInput();
-
-        String entry =
-                new Entry(englishName, sanskritName, poseType, benefits).create();
-
+        String entry = createEntryString();
         addEntry(entry);
+        listData(data);
+    }
+
+    public String createEntryString(){
+        String englishName = printsAndGetsInput(Messages.ADD_ENGLISH_NAME);
+        String sanskritName = printsAndGetsInput(Messages.ADD_SANSKRIT_NAME);
+        String poseType = printsAndGetsInput(Messages.ADD_POSE_TYPE);
+        String benefits = printsAndGetsInput(Messages.ADD_BENEFITS);
+        return new Entry(englishName, sanskritName, poseType, benefits).create();
     }
 
     public void addEntry(String entry){
         data.add(0, entry);
         output(Messages.ADD_END.send());
-        listData(data);
     }
 
     public void listData (ArrayList<String> data) {
@@ -93,9 +90,19 @@ public class Program {
         }
     }
 
+    public void deleteEntry(int userInput){
+        int index = userInput - 1;
+        data.remove( index );
+    }
+
     public void exitProgram(){
         output(Messages.EXIT.send());
         System.exit(0);
+    }
+
+    public String printsAndGetsInput(Messages message){
+        output(message.send());
+        return ioType.getInput();
     }
 
     public void output(String message){
@@ -109,4 +116,5 @@ public class Program {
     public String getEntryFromData(int index){
         return data.get(index);
     }
+
 }

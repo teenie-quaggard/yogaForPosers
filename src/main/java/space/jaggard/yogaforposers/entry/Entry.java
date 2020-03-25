@@ -18,6 +18,7 @@ public class Entry {
         this.healthBenefits = healthBenefits;
         this.id = UUID.randomUUID();
     }
+    
 
     public String create(){
         return "---------------------------------------------\n" +
