@@ -9,10 +9,9 @@ import java.util.ArrayList;
 
 public class Program {
 
-    Boolean isRunning;
+    boolean isRunning;
     IO ioType;
     ArrayList<String> data;
-
 
     public Program(){
        this(new Console(), new ArrayList<>());
@@ -26,29 +25,38 @@ public class Program {
 
     public void go(){
         output(Messages.GREETING.send());
-        output(Messages.INSTRUCTIONS.send());
+        output(Messages.INTRO.send());
 
         while (isRunning) {
-            String input = printsAndGetsInput(Messages.MENU);
-            selectAction(input);
+            String input = getInput(Messages.MENU);
+            String[] parsedInput = parseArguments(input);
+            selectAction(parsedInput);
         }
     }
 
-    public void selectAction(String userInput){
-//        String[] arr = userInput.split(" ", 2);
-//        String command = arr[0];
-//        int index = Integer.parseInt(arr[1]);
+    public String[] parseArguments(String userInput){
+        String input = trimWhitespace(userInput);
+        return input.split(" ");
+ }
 
-        switch(userInput){
+    public void selectAction(String[] parsedInput){
+        String command = parsedInput[0];
+        String argument = null;
+
+        if (parsedInput.length == 2) {
+            argument = parsedInput[1];
+        }
+
+        switch(command){
             case "-add":
                 newEntry();
                 break;
             case "-view":
                 listData(data);
                 break;
-//            case "-delete":
-//                deleteEntry(index);
-//                break;
+            case "-delete":
+                deleteEntry(argument);
+                break;
             case "-exit":
                 exitProgram();
                 break;
@@ -67,10 +75,10 @@ public class Program {
     }
 
     public String createEntryString(){
-        String englishName = printsAndGetsInput(Messages.ADD_ENGLISH_NAME);
-        String sanskritName = printsAndGetsInput(Messages.ADD_SANSKRIT_NAME);
-        String poseType = printsAndGetsInput(Messages.ADD_POSE_TYPE);
-        String benefits = printsAndGetsInput(Messages.ADD_BENEFITS);
+        String englishName = getInput(Messages.ADD_ENGLISH_NAME);
+        String sanskritName = getInput(Messages.ADD_SANSKRIT_NAME);
+        String poseType = getInput(Messages.ADD_POSE_TYPE);
+        String benefits = getInput(Messages.ADD_BENEFITS);
         return new Entry(englishName, sanskritName, poseType, benefits).create();
     }
 
@@ -83,15 +91,12 @@ public class Program {
         if (data.isEmpty()) {
             output(Messages.EMPTY_LIST.send());
         } else {
-            for (String entry : data) {
-                output((data.indexOf(entry) + 1) + ".");
-                output(entry);
-            }
+           prependsDataWithListNumber(data);
         }
     }
 
-    public void deleteEntry(int userInput){
-        int index = userInput - 1;
+    public void deleteEntry(String userInput){
+        int index = Integer.parseInt(userInput) - 1;
         data.remove( index );
     }
 
@@ -100,7 +105,7 @@ public class Program {
         System.exit(0);
     }
 
-    public String printsAndGetsInput(Messages message){
+    public String getInput(Messages message){
         output(message.send());
         return ioType.getInput();
     }
@@ -115,6 +120,17 @@ public class Program {
 
     public String getEntryFromData(int index){
         return data.get(index);
+    }
+
+    private String trimWhitespace(String string) {
+        return string.trim();
+    }
+
+    private void prependsDataWithListNumber(ArrayList<String> data){
+        for (String entry : data) {
+            output((data.indexOf(entry) + 1) + ".");
+            output(entry);
+        }
     }
 
 }

@@ -3,10 +3,9 @@ package space.jaggard.yogaforposers.messages;
 public enum Messages {
     GREETING("\n--------------------\n 🙏🏼 Nameste yogi 🙏🏼 " +
             "\n--------------------\n"),
-    INSTRUCTIONS("My name is Yogi Ja-va. I am here to help you save and keep " +
-            "track of all your favourite yogic poses.\nWhat would you like " +
-            "to do?\n"),
-    MENU("MENU:\n---------------\n" +
+    INTRO("My name is Yogi Ja-va. I am here to help you save and keep " +
+            "track of all your favourite yogic poses.\n"),
+    MENU("\nWhat would you like to do?:\n\nMENU:\n---------------\n" +
             "-add : to add an entry to your saved list of yoga poses\n" +
             "-view : to see what you have already saved to your list\n" +
             "-edit X : used when you'd like to edit an entry, where X is the " +

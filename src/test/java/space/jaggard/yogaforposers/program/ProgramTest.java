@@ -19,7 +19,8 @@ class ProgramTest {
     void go() {
     }
 
-    @Test void outputPrintsAMessageWhenPassedOne(){
+    @Test
+    void outputPrintsAMessageWhenPassedOne(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in = new ByteArrayInputStream("".getBytes());
@@ -109,7 +110,8 @@ class ProgramTest {
                 "Y", "Item Z"), program.getData());
     }
 
-    @Test void getEntryFromDataTakesAnIndexAndReturnsEntryFromListAtThatIndex(){
+    @Test
+    void getEntryFromDataTakesAnIndexAndReturnsEntryFromListAtThatIndex(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -122,7 +124,8 @@ class ProgramTest {
         assertEquals("Item X", program.getEntryFromData(0));
     }
 
-    @Test void deleteEntryShouldRemoveAnEntryFromTheDataList(){
+    @Test
+    void deleteEntryShouldRemoveAnEntryFromTheDataList(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         InputStream in =
@@ -132,13 +135,14 @@ class ProgramTest {
                 "Y", "Item Z"));
         Program program = new Program(console, list);
 
-        program.deleteEntry(2);
+        program.deleteEntry("2");
 
         assertEquals(Arrays.asList("Item X", "Item Z"), program.getData());
     }
 
 
-    @Test void printsAndGetsInputReturnsUserInput(){
+    @Test
+    void printsAndGetsInputReturnsUserInput(){
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(output);
         String input = "Pigeon Pose";
@@ -148,18 +152,20 @@ class ProgramTest {
         Program program = new Program(console, null);
         Messages message = Messages.ADD_ENGLISH_NAME;
 
-        assertEquals(input, program.printsAndGetsInput(message));
+        assertEquals(input, program.getInput(message));
     }
 
-//
-//    @Test void getUserArgumentsShouldTakeInUserInputAndReturnAnArraySeparatingCommandFromArgument(){
-//        ByteArrayOutputStream output = new ByteArrayOutputStream();
-//        PrintStream out = new PrintStream(output);
-//        InputStream in =
-//                new ByteArrayInputStream("".getBytes());
-//        Console console = new Console(in, out);
-//        Program program = new Program(console, null);
-//
-//        program.(2);
-//    }
+
+    @Test void parseArgumentsShouldTakeInUserInputAndReturnAnArraySeparatingUserCommandsFromArguments(){
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(output);
+        InputStream in =
+                new ByteArrayInputStream("".getBytes());
+        Console console = new Console(in, out);
+        Program program = new Program(console, null);
+
+        String[] parsedArguments = program.parseArguments("-delete 2");
+
+        assertEquals("-delete", parsedArguments[0]);
+        assertEquals("2", parsedArguments[1]);}
 }
