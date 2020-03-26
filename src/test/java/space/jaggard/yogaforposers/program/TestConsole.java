@@ -1,22 +1,25 @@
-package space.jaggard.yogaforposers.io;
+package space.jaggard.yogaforposers.program;
+
+import space.jaggard.yogaforposers.io.IO;
 
 import java.util.ArrayList;
 
 public class TestConsole implements IO {
 
+    private int index;
     ArrayList<String> input;
     String output;
 
     public TestConsole(ArrayList<String> input){
         this.input = input;
         this.output = "";
+        this.index = 0;
     }
 
     @Override
     public String getInput() {
-        return input.get(0);
+        return input.get(index++);
     }
-
 
     @Override
     public void print(String message) {
