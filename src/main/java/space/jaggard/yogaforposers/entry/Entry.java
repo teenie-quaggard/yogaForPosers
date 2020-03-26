@@ -28,8 +28,5 @@ public class Entry {
                 "\n---------------------------------------------\n";
     }
 
-//    public void edit(String field, String newInfo){
-//        field = newInfo;
-//    };
 
 }

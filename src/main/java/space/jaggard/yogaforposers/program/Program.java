@@ -88,19 +88,21 @@ public class Program {
     public void editEntry(String userInput){
         output(Messages.REVIEW_ENTRY_PROMPT);
         displayEntry(userInput);
-        String input = getInput(Messages.EDIT_PROMPT);
+        String input = getInput(Messages.EDIT_PROMPT).toUpperCase();
 
         if (input.equals("Y")) {
-           String field = getInput(Messages.EDIT_FIELD);
-        } else {
-            output(Messages.EDIT_WRONG_ENTRY);
-            listData(data);
+            String field = getInput(Messages.EDIT_FIELD);
         }
+//        } else {
+//            output(Messages.EDIT_WRONG_ENTRY);
+//            listData(data);
+//        }
     }
-//
+
 //    public void editField(String field){
 //        switch(field){
 //            case "1":
+//
 //                break;
 //            case "2":
 //                break;
