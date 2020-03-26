@@ -91,7 +91,9 @@ public class Program {
         String input = getInput(Messages.EDIT_PROMPT).toUpperCase();
 
         if (input.equals("Y")) {
-            String field = getInput(Messages.EDIT_FIELD);
+            Entry entry = getEntryFromData(convertToIndex(userInput));
+            String whichField = getInput(Messages.EDIT_GET_FIELD);
+            editField(entry, whichField);
         }
 //        } else {
 //            output(Messages.EDIT_WRONG_ENTRY);
@@ -99,19 +101,21 @@ public class Program {
 //        }
     }
 
-//    public void editField(String field){
-//        switch(field){
-//            case "1":
-//
-//                break;
-//            case "2":
-//                break;
-//            case "3":
-//                break;
-//            case "4":
-//                break;
-//        }
-//    }
+    public void editField(Entry entry, String field){
+        switch(field){
+            case "1":
+                String input = getInput(Messages.EDIT_FIELD);
+                entry.editEnglishName(input);
+                displayEntry(entry.stringify());
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                break;
+        }
+    }
 
 
     public void handleDelete(String userInput){
@@ -143,14 +147,14 @@ public class Program {
         return new Entry(englishName, sanskritName, poseType, benefits);
     }
 
-    public void addEntryToData(Entry entry){
-        data.add(0, entry);
-        outputMessage(Messages.ADD_FINISHED);
-    }
-
     public void deleteEntry(String userInput){
         int index = convertToIndex(userInput);
         data.remove( index );
+    }
+
+    private void addEntryToData(Entry entry){
+        data.add(0, entry);
+        outputMessage(Messages.ADD_FINISHED);
     }
 
     private void displayEntry(String userInput){
@@ -188,7 +192,7 @@ public class Program {
 
     private void prependDataWithNumber(){
         for (Entry entry : data) {
-            outputString((data.indexOf(entry) + 1) + ".\n");
+            outputString((data.indexOf(entry) + 1) + ".");
             outputString(entry.stringify());
         }
     }
@@ -201,6 +205,4 @@ public class Program {
     private void outputString(String string){
         ioType.print(string);
     }
-
-
 }

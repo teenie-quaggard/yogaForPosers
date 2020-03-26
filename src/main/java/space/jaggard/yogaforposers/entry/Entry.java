@@ -28,5 +28,10 @@ public class Entry {
                 "\n---------------------------------------------\n";
     }
 
+    public void editEnglishName(String input){
+        englishName = input;
+    }
+
+
 
 }

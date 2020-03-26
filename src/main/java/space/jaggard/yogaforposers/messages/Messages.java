@@ -33,12 +33,14 @@ public enum Messages {
     ADD_FINISHED("Thanks! Here's what you have saved to your list: \n"),
     REVIEW_ENTRY_PROMPT("Here's the entry that you've selected:\n"),
     EDIT_PROMPT("Is this the entry you'd like to edit? (Y/N): "),
-    EDIT_FIELD("Which field would you like to edit? Enter the number that " +
+    EDIT_GET_FIELD("Which field would you like to edit? Enter the number that " +
             "corresponds to the correct field. (1-4):\n" +
             "1. English name\n" +
             "2. Sanskrit name\n" +
             "3. Pose type\n" +
-            "4. Health benefits"),
+            "4. Health benefits\n"),
+    EDIT_FIELD("Enter your update to the field and click enter. " +
+            "Note that you will be overwriting your saved entry! : \n"),
     EDIT_WRONG_ENTRY("Wrong entry? No problem, let's try again."),
     EDIT_FINISHED("All done!"),
     DELETE_ENTRY("⚠️ Are you sure you'd like to delete this entry? " +
