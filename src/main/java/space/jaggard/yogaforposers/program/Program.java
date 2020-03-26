@@ -34,7 +34,7 @@ public class Program {
     }
 
     public void tick(){
-        String input = getInput(Messages.MENU);
+        String input = getInput(Messages.GET_COMMAND);
         String[] parsedInput = parse(input);
         selectCommand(parsedInput);
     }
@@ -49,6 +49,9 @@ public class Program {
         String command = uppercaseInput(parsedInput[0]);
 
         switch(command){
+            case "-HELP":
+                outputMessage(Messages.MENU);
+                break;
             case "-ADD":
                 handleAdd();
                 break;
@@ -81,12 +84,15 @@ public class Program {
         if (data.isEmpty()) {
             outputMessage(Messages.EMPTY_LIST);
         } else {
-            outputMessage(Messages.LIST);
+            outputMessage(Messages.LIST_TOP);
             prependDataWithNumber();
+            outputMessage(Messages.LIST_BOTTOM);
         }
     }
 
     public void editEntry(String userInput){
+
+
         outputMessage(Messages.REVIEW_ENTRY_PROMPT);
         displayEntry(userInput);
         String input = getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
@@ -178,6 +184,12 @@ public class Program {
         data.remove( index );
     }
 
+    public void validateNumberOfArguments(String userInput){
+        if(!Validator.hasTwoArguments(userInput)){
+            outputMessage(Messages.INCORRECT_CMD_ARGS);
+        }
+    }
+
     private void addEntryToData(Entry entry){
         data.add(0, entry);
         outputMessage(Messages.ADD_FINISHED);
@@ -231,4 +243,5 @@ public class Program {
     private void outputString(String string){
         ioType.print(string);
     }
+
 }

@@ -12,10 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProgramTest {
 
     @Test
-    void go() {
-    }
-
-    @Test
     void addEntryHandlesAddingAnEntry(){
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Pigeon pose"
                 , "Eka Pada Rajakapotasana", "Hip opener", "Opens hip joint"));
@@ -28,18 +24,20 @@ class ProgramTest {
         String poseMsg = Messages.ADD_POSE_TYPE.stringify();
         String benefitsMsg = Messages.ADD_BENEFITS.stringify();
         String finishedMsg = Messages.ADD_FINISHED.stringify();
-        String listMsg = Messages.LIST.stringify();
+        String listTopMsg = Messages.LIST_TOP.stringify();
+        String listBottomMsg = Messages.LIST_BOTTOM.stringify();
 
         program.handleAdd();
 
         assertEquals(addMsg + englishNameMsg + sanskritMsg + poseMsg
-                        + benefitsMsg + finishedMsg + listMsg + "1." +
+                        + benefitsMsg + finishedMsg + listTopMsg + "1." +
                         "---------------------------------------------\n" +
                         "ENGLISH NAME: Pigeon pose\n" +
                         "SANSKRIT NAME: Eka Pada Rajakapotasana\n" +
                         "POSE TYPE: Hip opener\n" +
                         "HEALTH BENEFITS: Opens hip joint\n" +
-                        "---------------------------------------------\n",
+                        "---------------------------------------------\n"
+                        + listBottomMsg,
                 console.printedText());
     }
 
@@ -75,10 +73,11 @@ class ProgramTest {
         Program program = new Program(console,
                 new ArrayList<>(Arrays.asList(entry, entry2)));
 
-        String listMsg = Messages.LIST.stringify();
+        String listTop = Messages.LIST_TOP.stringify();
+        String listBottom = Messages.LIST_BOTTOM.stringify();
         program.listData();
 
-        assertEquals(listMsg +
+        assertEquals(listTop +
                 "1." +
                 "---------------------------------------------\n" +
                 "ENGLISH NAME: Pigeon pose\n" +
@@ -92,7 +91,8 @@ class ProgramTest {
                 "SANSKRIT NAME: Eka Pada Rajakapotasana\n" +
                 "POSE TYPE: Hip opener\n" +
                 "HEALTH BENEFITS: Opens hip joint\n" +
-                "---------------------------------------------\n", console.printedText());
+                "---------------------------------------------\n" + listBottom,
+                console.printedText());
     }
 
     @Test
@@ -220,6 +220,27 @@ class ProgramTest {
 
         program.getRequiredEnglishName();
         assertEquals(addName + requiredField + addName, console.printedText());
+    }
+
+    @Test
+    void validateNumberOfArguments(){
+        String invalidInput = "-DEL";
+        String validInput = "-DEL 1";
+        ArrayList<String> input = new ArrayList<>(Arrays.asList(invalidInput,
+                validInput));
+        Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
+                "Hip opener", "Opens hip joint");
+
+        ArrayList<Entry> entries =
+                new ArrayList<>(Arrays.asList(entry));
+
+        TestConsole console = new TestConsole(input);
+        Program program = new Program(console, entries);
+
+        String incorrectArgs = Messages.INCORRECT_CMD_ARGS.stringify();
+
+        program.validateNumberOfArguments(invalidInput);
+        assertEquals(incorrectArgs, console.printedText());
     }
 
 }

@@ -7,7 +7,10 @@ public enum Messages {
             "\n--------------------\n"),
     INTRO("Hello, my name is Yogi Ja-Va. \nI am here to help you save and " +
             "keep track of all your favourite yogic poses.\n"),
-    MENU("What would you like to do? \n" +
+    GET_COMMAND("What would you like to do? \nType -HELP if you'd like to see" +
+            " " +
+            "the list of available commands:"),
+    MENU(" \nMENU\n" +
             "-----------------------------------------------------------------------\n" +
             Commands.ADD.stringify() +
             "     | 👆 to add an entry to your saved list of yoga poses\n" +
@@ -19,20 +22,31 @@ public enum Messages {
             "   | ❌ to delete an entry, where X is the number of the entry\n" +
             Commands.EXIT.stringify() +
             "    | ✌️ to close the program (FYI - you'll lose your data!)\n" +
-            "-----------------------------------------------------------------------\n" +
-            "Enter a command from above and click 'return' on your keyboard: "),
+            "-----------------------------------------------------------------------\n"
+            ),
     ERR_WRONG_COMMAND("🙈 Sorry, incorrect command. Please try again. 🙈"),
     EMPTY_LIST("At the moment, you do not have any saved yoga poses. When " +
             "you're ready to add one to your list, type '-add':"),
-    LIST("YOUR LIST:\n‍"),
+    LIST_TOP(
+            " __        ________  ______   _________  \n" +
+            "/_/\\      /_______/\\/_____/\\ /________/\\ \n" +
+            "\\:\\ \\     \\__.::._\\/\\::::_\\/_\\__.::.__\\/ \n" +
+            " \\:\\ \\       \\::\\ \\  \\:\\/___/\\  \\::\\ \\   \n" +
+            "  \\:\\ \\____  _\\::\\ \\__\\_::._\\:\\  \\::\\ \\  \n" +
+            "   \\:\\/___/\\/__\\::\\__/\\ /____\\:\\  \\::\\ \\ \n" +
+            "    \\_____\\/\\________\\/ \\_____\\/   \\__\\/ \n" +
+            "                                         "),
+    LIST_BOTTOM("🧘 Keep your list growing, yogi! 🧘\n\n‍‍"),
     ADD_PROMPT("Great! Let's add to your favourite yoga poses.\n"),
     ADD_ENGLISH_NAME("What's the english name for the pose?: "),
     ADD_SANSKRIT_NAME("What's the Sanskrit name for the pose?: "),
     ADD_POSE_TYPE("What's the pose type?: "),
     ADD_BENEFITS("Finally, what health benefits does the pose have?: "),
-    ADD_FINISHED("Thanks! Here's what you have saved to your list: \n"),
+    ADD_FINISHED("All done! Here's what you have so far:\n"),
     REQUIRED_FIELD("🙏🏼 Sorry, this is a required field."),
     REVIEW_ENTRY_PROMPT("Here's the entry that you've selected:\n"),
+    INCORRECT_CMD_ARGS("Sorry, there is something wrong with the way you've " +
+            "inputted your arguments"),
     EDIT_IS_RIGHT_ENTRY("Is this the entry you'd like to edit? (Y/N): "),
     EDIT_GET_FIELD("Which field would you like to edit? Enter the number that " +
             "corresponds to the correct field. (1-4):\n" +
