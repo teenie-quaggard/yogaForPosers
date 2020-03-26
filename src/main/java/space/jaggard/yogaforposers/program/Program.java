@@ -124,15 +124,15 @@ public class Program {
         }
     }
 
+    public void exitProgram(){
+        outputMessage(Messages.EXIT);
+        System.exit(0);
+    }
+
     private String confirmEntryToDelete(String userInput){
         outputMessage(Messages.REVIEW_ENTRY_PROMPT);
         displayEntry(userInput);
         return getInput(Messages.DELETE_ENTRY).toUpperCase();
-    }
-
-    public void exitProgram(){
-        outputMessage(Messages.EXIT);
-        System.exit(0);
     }
 
     public Entry createEntry(){
@@ -153,27 +153,23 @@ public class Program {
         data.remove( index );
     }
 
-    public void displayEntry(String userInput){
+    private void displayEntry(String userInput){
         int index = convertToIndex(userInput);
         Entry entry = getEntryFromData(index);
         String entryString = entry.stringify();
         outputString(entryString);
     }
 
-    public String getInput(Messages message){
+    private String getInput(Messages message){
         outputMessage(message);
         return ioType.getInput();
     }
 
-    public ArrayList<Entry> getData(){
-        return data;
-    }
-
-    public Entry getEntryFromData(int index){
+    private Entry getEntryFromData(int index){
         return data.get(index);
     }
 
-    public String[] parse(String userInput){
+    private String[] parse(String userInput){
         String input = trimWhitespace(userInput);
         return input.split(" ");
     }
