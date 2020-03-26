@@ -19,7 +19,7 @@ public class Entry {
         this.id = UUID.randomUUID();
     }
 
-    public String create(){
+    public String stringify(){
         return "---------------------------------------------\n" +
                 "ENGLISH NAME: " + englishName + "\n" +
                 "SANSKRIT NAME: " + sanskritName + "\n"+

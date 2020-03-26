@@ -24,7 +24,7 @@ public enum Messages {
     ERR_WRONG_COMMAND("🙈 Sorry, incorrect command. Please try again. 🙈"),
     EMPTY_LIST("At the moment, you do not have any saved yoga poses. When " +
             "you're ready to add one to your list, type '-add':"),
-    LIST("YOUR LIST:‍"),
+    LIST("YOUR LIST:\n‍"),
     ADD_PROMPT("Great! Let's add to your favourite yoga poses.\n"),
     ADD_ENGLISH_NAME("What's the english name for the pose?: "),
     ADD_SANSKRIT_NAME("What's the Sanskrit name for the pose?: "),

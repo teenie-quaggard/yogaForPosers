@@ -17,7 +17,7 @@ class EntryTest {
                         "POSE TYPE: Hip opener\n"+
                         "HEALTH BENEFITS: Opens the hip joint" +
                         "\n---------------------------------------------\n",
-                        entry.create());
+                        entry.stringify());
     }
 
 //    @Test
