@@ -31,6 +31,7 @@ public enum Messages {
     ADD_POSE_TYPE("What's the pose type?: "),
     ADD_BENEFITS("Finally, what health benefits does the pose have?: "),
     ADD_FINISHED("Thanks! Here's what you have saved to your list: \n"),
+    REQUIRED_FIELD("🙏🏼 Sorry, this is a required field."),
     REVIEW_ENTRY_PROMPT("Here's the entry that you've selected:\n"),
     EDIT_IS_RIGHT_ENTRY("Is this the entry you'd like to edit? (Y/N): "),
     EDIT_GET_FIELD("Which field would you like to edit? Enter the number that " +

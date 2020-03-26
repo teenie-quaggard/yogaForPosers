@@ -207,4 +207,19 @@ class ProgramTest {
                 console.printedText());
     }
 
+    @Test
+    void getEnglishNameIsARequiredField(){
+        ArrayList<String> input = new ArrayList<>(Arrays.asList(" ", "English" +
+                " title"));
+
+        TestConsole console = new TestConsole(input);
+        Program program = new Program(console, null);
+
+        String addName = Messages.ADD_ENGLISH_NAME.stringify();
+        String requiredField = Messages.REQUIRED_FIELD.stringify();
+
+        program.getRequiredEnglishName();
+        assertEquals(addName + requiredField + addName, console.printedText());
+    }
+
 }
