@@ -28,9 +28,16 @@ public class Entry {
                 "\n---------------------------------------------\n";
     }
 
-    public void editEnglishName(String input){
+    public void updateEnglishName(String input){
         englishName = input;
     }
+
+    public void updateSanskritName(String input) { sanskritName = input; }
+
+    public void updatePoseType(String input) { poseType = input; }
+
+    public void updateBenefits(String input) { healthBenefits = input; }
+
 
 
 

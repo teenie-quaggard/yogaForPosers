@@ -20,21 +20,4 @@ class EntryTest {
                         entry.stringify());
     }
 
-//    @Test
-//    void editField(){
-//        Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana",
-//                "Hip opener",  "Opens the hip joint");
-//
-//        entry.edit("englishName", "Pigeon");
-//
-//        assertEquals("---------------------------------------------\n" +
-//                        "ENGLISH NAME: Pigeon\n" +
-//                        "SANSKRIT NAME: Eka Pada Rajakapotasana\n"+
-//                        "POSE TYPE: Hip opener\n"+
-//                        "HEALTH BENEFITS: Opens the hip joint" +
-//                        "\n---------------------------------------------\n",
-//                entry.create());
-//
-//    }
-
 }

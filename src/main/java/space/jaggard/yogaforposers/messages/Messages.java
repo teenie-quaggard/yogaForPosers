@@ -32,7 +32,7 @@ public enum Messages {
     ADD_BENEFITS("Finally, what health benefits does the pose have?: "),
     ADD_FINISHED("Thanks! Here's what you have saved to your list: \n"),
     REVIEW_ENTRY_PROMPT("Here's the entry that you've selected:\n"),
-    EDIT_PROMPT("Is this the entry you'd like to edit? (Y/N): "),
+    EDIT_IS_RIGHT_ENTRY("Is this the entry you'd like to edit? (Y/N): "),
     EDIT_GET_FIELD("Which field would you like to edit? Enter the number that " +
             "corresponds to the correct field. (1-4):\n" +
             "1. English name\n" +

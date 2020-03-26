@@ -186,7 +186,7 @@ class ProgramTest {
         program.editEntry("1");
 
         String reviewEntryPrompt = Messages.REVIEW_ENTRY_PROMPT.stringify();
-        String editPrompt = Messages.EDIT_PROMPT.stringify();
+        String editPrompt = Messages.EDIT_IS_RIGHT_ENTRY.stringify();
         String editField = Messages.EDIT_GET_FIELD.stringify();
         String editEnglishName = Messages.EDIT_FIELD.stringify();
 

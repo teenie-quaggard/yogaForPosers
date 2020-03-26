@@ -88,35 +88,43 @@ public class Program {
     public void editEntry(String userInput){
         outputMessage(Messages.REVIEW_ENTRY_PROMPT);
         displayEntry(userInput);
-        String input = getInput(Messages.EDIT_PROMPT).toUpperCase();
+        String input = getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
 
         if (input.equals("Y")) {
-            Entry entry = getEntryFromData(convertToIndex(userInput));
+            int index = convertToIndex(userInput);
+            Entry entry = getEntryFromData(index);
             String whichField = getInput(Messages.EDIT_GET_FIELD);
-            editField(entry, whichField);
+            editField(entry, whichField, userInput);
+        } else {
+            outputMessage(Messages.EDIT_WRONG_ENTRY);
+            listData();
         }
-//        } else {
-//            output(Messages.EDIT_WRONG_ENTRY);
-//            listData(data);
-//        }
     }
 
-    public void editField(Entry entry, String field){
+    public void editField(Entry entry, String field, String userInput){
         switch(field){
             case "1":
-                String input = getInput(Messages.EDIT_FIELD);
-                entry.editEnglishName(input);
-                displayEntry(entry.stringify());
+                String englishName = getInput(Messages.EDIT_FIELD);
+                entry.updateEnglishName(englishName);
+                displayEntry(userInput);
                 break;
             case "2":
+                String sanskritName  = getInput(Messages.EDIT_FIELD);
+                entry.updateSanskritName(sanskritName);
+                displayEntry(userInput);
                 break;
             case "3":
+                String poseType = getInput(Messages.EDIT_FIELD);
+                entry.updatePoseType(poseType);
+                displayEntry(userInput);
                 break;
             case "4":
+                String benefits = getInput(Messages.EDIT_FIELD);
+                entry.updateBenefits(benefits);
+                displayEntry(userInput);
                 break;
         }
     }
-
 
     public void handleDelete(String userInput){
         String input = confirmEntryToDelete(userInput);
