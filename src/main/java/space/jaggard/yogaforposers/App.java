@@ -12,7 +12,4 @@ public class App {
         program.go();
     }
 
-    public String isRunning(){
-        return "App is running!";
-    }
 }
