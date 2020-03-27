@@ -1,4 +1,5 @@
 # Yoga For Posers 
+
 A command line program built to help yogis keep track of their favourite yoga
  poses.
  
@@ -96,3 +97,8 @@ If using Gradle, use the command ```./gradlew test``` while within the root
 - Branching and committing at appropriate points
  
 
+=======
+[![Build Status](https://travis-ci.org/teenie-quaggard/yogaForPosers.svg?branch=master)](https://travis-ci.org/teenie-quaggard/yogaForPosers)
+
+An app to help yogis keep track of their favourite yoga poses
+>>>>>>> master
