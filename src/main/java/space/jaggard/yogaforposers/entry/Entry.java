@@ -38,7 +38,4 @@ public class Entry {
 
     public void updateBenefits(String input) { healthBenefits = input; }
 
-
-
-
 }
