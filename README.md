@@ -1,4 +1,5 @@
 # Yoga For Posers 
+[![Build Status](https://travis-ci.org/teenie-quaggard/yogaForPosers.svg?branch=master)](https://travis-ci.org/teenie-quaggard/yogaForPosers)
 
 A command line program built to help yogis keep track of their favourite yoga
  poses.
@@ -60,8 +61,8 @@ If using Gradle, use the command ```./gradlew test``` while within the root
  potentially be side-stepped by refactoring and instead using a static Counter
   class to create unique IDs which are more human readable than UUID
 - Program class should be refactored as at the moment it is holding basically
- all of the logic - command and their dependent methods should be refactored
-  out into their own classes and should include unit tests
+ all of the logic. Commands and their dependent methods should be refactored
+  out into their own classes and should include unit tests for all their methods.
 - Better validation should be implemented throughout the program
 - Small UI improvements throughout
 
@@ -96,9 +97,3 @@ If using Gradle, use the command ```./gradlew test``` while within the root
 - Moving too quickly through the stories without testing for edge-cases
 - Branching and committing at appropriate points
  
-
-=======
-[![Build Status](https://travis-ci.org/teenie-quaggard/yogaForPosers.svg?branch=master)](https://travis-ci.org/teenie-quaggard/yogaForPosers)
-
-An app to help yogis keep track of their favourite yoga poses
->>>>>>> master
