@@ -1,5 +1,6 @@
 package space.jaggard.yogaforposers.program;
 
+import space.jaggard.yogaforposers.commands.AddEntry;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -74,9 +75,8 @@ public class Program {
     }
 
     public void handleAdd(){
-        outputMessage(Messages.ADD_PROMPT);
-        Entry entry = createEntry();
-        addEntryToData(entry);
+        AddEntry addEntry = new AddEntry(ioType, data);
+        addEntry.handleAdd();
         listData();
     }
 
@@ -154,30 +154,7 @@ public class Program {
         return getInput(Messages.DELETE_ENTRY).toUpperCase();
     }
 
-    public Entry createEntry(){
 
-        String englishName = getRequiredEnglishName();
-        String sanskritName = getInput(Messages.ADD_SANSKRIT_NAME);
-        String poseType = getInput(Messages.ADD_POSE_TYPE);
-        String benefits = getInput(Messages.ADD_BENEFITS);
-        return new Entry(englishName, sanskritName, poseType, benefits);
-    }
-
-    public String getRequiredEnglishName(){
-        boolean validInput = false;
-        String englishName = "";
-
-        while (!validInput) {
-            englishName = getInput(Messages.ADD_ENGLISH_NAME);
-            if (Validator.hasInput(englishName)) {
-               validInput = true;
-            } else {
-                outputMessage(Messages.REQUIRED_FIELD);
-                validInput = false;
-            }
-        }
-        return englishName;
-    }
 
     public void deleteEntry(String userInput){
         int index = convertToIndex(userInput);
@@ -188,11 +165,6 @@ public class Program {
         if(!Validator.hasTwoArguments(userInput)){
             outputMessage(Messages.INCORRECT_CMD_ARGS);
         }
-    }
-
-    private void addEntryToData(Entry entry){
-        data.add(0, entry);
-        outputMessage(Messages.ADD_FINISHED);
     }
 
     private void displayEntry(String userInput){
