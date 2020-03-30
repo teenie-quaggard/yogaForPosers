@@ -38,4 +38,6 @@ public class Entry {
 
     public void updateBenefits(String input) { healthBenefits = input; }
 
+    public String returnEnglishName() { return englishName; }
+
 }
