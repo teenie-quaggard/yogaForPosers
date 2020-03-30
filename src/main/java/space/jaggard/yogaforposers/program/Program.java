@@ -80,24 +80,24 @@ public class Program {
     }
 
     public void listData() {
-        ListCommand list = new ListCommand(ioType);
-        list.listData(data);
+        ListCommand listCommand = new ListCommand(ioType);
+        listCommand.listData(data);
     }
 
     public void editEntry(String userInput){
-        EditCommand edit = new EditCommand(ioType);
-        edit.edit(userInput, data);
+        EditCommand editCommand = new EditCommand(ioType);
+        editCommand.edit(userInput, data);
         listData();
     }
 
     public void handleDelete(String userInput){
-        DeleteCommand delete = new DeleteCommand(ioType);
-        delete.delete(userInput, data);
+        DeleteCommand deleteCommand = new DeleteCommand(ioType);
+        deleteCommand.delete(userInput, data);
     }
 
     public void exitProgram(){
-        ExitCommand exit = new ExitCommand(ioType);
-        exit.exitProgram();
+        ExitCommand exitCommand = new ExitCommand(ioType);
+        exitCommand.exitProgram();
     }
 
     public static String getEnglishName(Entry entry){
