@@ -45,8 +45,9 @@ public enum Messages {
     ADD_FINISHED("All done! Here's what you have so far:\n"),
     REQUIRED_FIELD("🙏🏼 Sorry, this is a required field."),
     REVIEW_ENTRY_PROMPT("Here's the entry that you've selected:\n"),
-    INCORRECT_CMD_ARGS("Sorry, there is something wrong with the way you've " +
-            "inputted your arguments"),
+    INCORRECT_EDIT("❌ Sorry, there is something wrong with the way you've " +
+            "made your request. ❌ \nPlease check that you have entered -EDIT " +
+            "X, replacing X with the number of the entry you'd like to edit."),
     EDIT_IS_RIGHT_ENTRY("Is this the entry you'd like to edit? (Y/N): "),
     EDIT_GET_FIELD("Which field would you like to edit? Enter the number that " +
             "corresponds to the correct field. (1-4):\n" +
@@ -58,9 +59,12 @@ public enum Messages {
             "Note that you will be overwriting your saved entry! : \n"),
     EDIT_WRONG_ENTRY("Wrong entry? No problem, let's try again."),
     EDIT_FINISHED("All done!"),
+    INCORRECT_DEL("❌ Sorry, there is something wrong with the way you've " +
+            "made your request. ❌ \nPlease check that you have entered -DEL " +
+            "X, replacing X with the number of the entry you'd like to edit."),
     DELETE_ENTRY("⚠️ Are you sure you'd like to delete this entry? " +
             "(Y/N): ⚠️️"),
-    CONFIRM_DELETE("Entry deleted ❌\n"),
+    CONFIRM_DELETE("Entry deleted 👍🏼\n"),
     UNCONFIRMED_DELETE("No stress, we will save that for later."),
     EXIT("Bye bye! Hope to see you soon! 👋🏼")
     ;

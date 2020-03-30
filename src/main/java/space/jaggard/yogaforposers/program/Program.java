@@ -5,7 +5,6 @@ import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.io.IO;
-import space.jaggard.yogaforposers.validator.Validator;
 
 import java.util.ArrayList;
 
@@ -75,36 +74,30 @@ public class Program {
     }
 
     public void handleAdd(){
-        AddEntry addEntry = new AddEntry(ioType);
-        addEntry.handleAdd(data);
+        AddCommand addCommand = new AddCommand(ioType);
+        addCommand.handleAdd(data);
         listData();
     }
 
     public void listData() {
-        ListData list = new ListData(ioType);
-        list.listData(data);
+        ListCommand listCommand = new ListCommand(ioType);
+        listCommand.listData(data);
     }
 
     public void editEntry(String userInput){
-        EditEntry edit = new EditEntry(ioType);
-        edit.editEntry(userInput, data);
+        EditCommand editCommand = new EditCommand(ioType);
+        editCommand.edit(userInput, data);
         listData();
     }
 
     public void handleDelete(String userInput){
-        DeleteEntry delete = new DeleteEntry(ioType);
-        delete.handleDelete(userInput, data);
+        DeleteCommand deleteCommand = new DeleteCommand(ioType);
+        deleteCommand.delete(userInput, data);
     }
 
     public void exitProgram(){
-        ExitProgram exit = new ExitProgram(ioType);
-        exit.exitProgram();
-    }
-
-    public void validateNumberOfArguments(String userInput){
-        if(!Validator.hasTwoArguments(userInput)){
-            outputMessage(Messages.INCORRECT_CMD_ARGS);
-        }
+        ExitCommand exitCommand = new ExitCommand(ioType);
+        exitCommand.exitProgram();
     }
 
     public static String getEnglishName(Entry entry){

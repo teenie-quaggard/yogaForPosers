@@ -3,23 +3,29 @@ package space.jaggard.yogaforposers.commands;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.messages.Messages;
+import space.jaggard.yogaforposers.validator.Validator;
+
 
 import java.util.ArrayList;
 
-public class EditEntry {
+public class EditCommand {
 
     IO ioType;
 
-    public EditEntry(IO ioType){
+    public EditCommand(IO ioType){
         this.ioType = ioType;
     }
 
-    public void editEntry(String userInput, ArrayList<Entry> data){
+    public void edit(String userInput, ArrayList<Entry> data){
+        if (Validator.badArguments(userInput)){
+            outputMessage(Messages.INCORRECT_EDIT);
+        } else {
+            editEntry(userInput, data);
+        }
+    }
 
-        outputMessage(Messages.REVIEW_ENTRY_PROMPT);
-        displayEntry(userInput, data);
-        String input = getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
-
+    private void editEntry(String userInput, ArrayList<Entry> data){
+        String input = checkIfCorrectEntry(userInput, data);
         if (input.equals("Y")) {
             int index = convertToIndex(userInput);
             Entry entry = getEntryFromData(index,  data);
@@ -30,7 +36,13 @@ public class EditEntry {
         }
     }
 
-    public void editField(Entry entry, String field, String userInput,
+    private String checkIfCorrectEntry(String userInput, ArrayList<Entry> data){
+        outputMessage(Messages.REVIEW_ENTRY_PROMPT);
+        displayEntry(userInput, data);
+        return getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
+    };
+
+     private void editField(Entry entry, String field, String userInput,
                           ArrayList<Entry> data){
         switch(field){
             case "1":

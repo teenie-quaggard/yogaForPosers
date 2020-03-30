@@ -191,25 +191,4 @@ class ProgramTest {
         assertEquals("Pigeon pose", Program.getEnglishName(entry));
     }
 
-    @Test
-    void validateNumberOfArguments(){
-        String invalidInput = "-DEL";
-        String validInput = "-DEL 1";
-        ArrayList<String> input = new ArrayList<>(Arrays.asList(invalidInput,
-                validInput));
-        Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
-
-        ArrayList<Entry> entries =
-                new ArrayList<>(Arrays.asList(entry));
-
-        TestConsole console = new TestConsole(input);
-        Program program = new Program(console, entries);
-
-        String incorrectArgs = Messages.INCORRECT_CMD_ARGS.stringify();
-
-        program.validateNumberOfArguments(invalidInput);
-        assertEquals(incorrectArgs, console.printedText());
-    }
-
 }

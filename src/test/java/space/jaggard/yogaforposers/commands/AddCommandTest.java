@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddEntryTest {
+class AddCommandTest {
 
     @Test
     void handleAdd() {
@@ -25,7 +25,7 @@ class AddEntryTest {
                 " title"));
 
         TestConsole console = new TestConsole(input);
-        AddEntry add = new AddEntry(console);
+        AddCommand add = new AddCommand(console);
 
         String addName = Messages.ADD_ENGLISH_NAME.stringify();
         String requiredField = Messages.REQUIRED_FIELD.stringify();

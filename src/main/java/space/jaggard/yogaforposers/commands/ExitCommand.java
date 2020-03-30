@@ -3,11 +3,11 @@ package space.jaggard.yogaforposers.commands;
 import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.messages.Messages;
 
-public class ExitProgram {
+public class ExitCommand {
 
     IO ioType;
 
-    public ExitProgram(IO ioType){
+    public ExitCommand(IO ioType){
         this.ioType = ioType;
     }
 

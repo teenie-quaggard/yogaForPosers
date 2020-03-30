@@ -6,11 +6,11 @@ import space.jaggard.yogaforposers.messages.Messages;
 
 import java.util.ArrayList;
 
-public class ListData {
+public class ListCommand {
 
     IO ioType;
 
-    public ListData(IO ioType){
+    public ListCommand(IO ioType){
         this.ioType = ioType;
     }
 
