@@ -101,12 +101,6 @@ public class Program {
         exit.exitProgram();
     }
 
-    public void validateNumberOfArguments(String userInput){
-        if(!Validator.hasTwoArguments(userInput)){
-            outputMessage(Messages.INCORRECT_CMD_ARGS);
-        }
-    }
-
     public static String getEnglishName(Entry entry){
         return entry.returnEnglishName();
     };

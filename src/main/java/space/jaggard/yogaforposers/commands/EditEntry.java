@@ -4,6 +4,7 @@ import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.messages.Messages;
 
+
 import java.util.ArrayList;
 
 public class EditEntry {
@@ -16,9 +17,11 @@ public class EditEntry {
 
     public void editEntry(String userInput, ArrayList<Entry> data){
 
-        outputMessage(Messages.REVIEW_ENTRY_PROMPT);
-        displayEntry(userInput, data);
-        String input = getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
+        if (badArguments(userInput)) {
+           return;
+        }
+
+        String input = checkIfCorrectEntry(userInput, data);
 
         if (input.equals("Y")) {
             int index = convertToIndex(userInput);
@@ -30,7 +33,22 @@ public class EditEntry {
         }
     }
 
-    public void editField(Entry entry, String field, String userInput,
+    private boolean badArguments(String userInput){
+        if (userInput == null || userInput.equals("")) {
+            outputMessage(Messages.INCORRECT_EDIT);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    private String checkIfCorrectEntry(String userInput, ArrayList<Entry> data){
+        outputMessage(Messages.REVIEW_ENTRY_PROMPT);
+        displayEntry(userInput, data);
+        return getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
+    };
+
+     private void editField(Entry entry, String field, String userInput,
                           ArrayList<Entry> data){
         switch(field){
             case "1":
