@@ -165,48 +165,31 @@ class ProgramTest {
         assertEquals(new ArrayList<>(Arrays.asList(entry2)), program.data);
     };
 
-
     @Test
-    void editEntryDisplaysSelectedEntry(){
-
+    void editEntryEditsASelectedEntry(){
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
                 "Hip opener", "Opens hip joint");
-
-        Entry entry2 = new Entry("Corpse pose", "Savasana",
-                "Relaxation", "Calming");
-
         ArrayList<Entry> entries =
-                new ArrayList<>(Arrays.asList(entry, entry2));
-
+                new ArrayList<>(Arrays.asList(entry));
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Y", "1", "New title"));
 
         TestConsole console = new TestConsole(input);
         Program program = new Program(console, entries);
 
         program.editEntry("1");
+        Entry editedEntry = program.getEntryFromData(0);
 
-        String reviewEntryPrompt = Messages.REVIEW_ENTRY_PROMPT.stringify();
-        String editPrompt = Messages.EDIT_IS_RIGHT_ENTRY.stringify();
-        String editField = Messages.EDIT_GET_FIELD.stringify();
-        String editEnglishName = Messages.EDIT_FIELD.stringify();
-
-        assertEquals(reviewEntryPrompt +
-                        "---------------------------------------------\n" +
-                        "ENGLISH NAME: Pigeon pose\n" +
-                        "SANSKRIT NAME: Eka Pada Rajakapotasana\n" +
-                        "POSE TYPE: Hip opener\n" +
-                        "HEALTH BENEFITS: Opens hip joint\n" +
-                        "---------------------------------------------\n"
-                        + editPrompt + editField + editEnglishName +
-                        "---------------------------------------------\n" +
-                        "ENGLISH NAME: New title\n" +
-                        "SANSKRIT NAME: Eka Pada Rajakapotasana\n" +
-                        "POSE TYPE: Hip opener\n" +
-                        "HEALTH BENEFITS: Opens hip joint\n" +
-                        "---------------------------------------------\n",
-                console.printedText());
+        assertEquals("New title", Program.getEnglishName(editedEntry));
     }
 
+    @Test
+    void getFieldFromEntry(){
+        Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
+                "Hip opener", "Opens hip joint");
+        String fieldName = "englishName";
+
+        assertEquals("Pigeon pose", Program.getEnglishName(entry));
+    }
 
     @Test
     void validateNumberOfArguments(){

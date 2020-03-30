@@ -1,6 +1,7 @@
 package space.jaggard.yogaforposers.program;
 
 import space.jaggard.yogaforposers.commands.AddEntry;
+import space.jaggard.yogaforposers.commands.EditEntry;
 import space.jaggard.yogaforposers.commands.ListData;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
@@ -87,45 +88,9 @@ public class Program {
     }
 
     public void editEntry(String userInput){
-
-        outputMessage(Messages.REVIEW_ENTRY_PROMPT);
-        displayEntry(userInput);
-        String input = getInput(Messages.EDIT_IS_RIGHT_ENTRY).toUpperCase();
-
-        if (input.equals("Y")) {
-            int index = convertToIndex(userInput);
-            Entry entry = getEntryFromData(index);
-            String whichField = getInput(Messages.EDIT_GET_FIELD);
-            editField(entry, whichField, userInput);
-        } else {
-            outputMessage(Messages.EDIT_WRONG_ENTRY);
-            listData();
-        }
-    }
-
-    public void editField(Entry entry, String field, String userInput){
-        switch(field){
-            case "1":
-                String englishName = getInput(Messages.EDIT_FIELD);
-                entry.updateEnglishName(englishName);
-                displayEntry(userInput);
-                break;
-            case "2":
-                String sanskritName  = getInput(Messages.EDIT_FIELD);
-                entry.updateSanskritName(sanskritName);
-                displayEntry(userInput);
-                break;
-            case "3":
-                String poseType = getInput(Messages.EDIT_FIELD);
-                entry.updatePoseType(poseType);
-                displayEntry(userInput);
-                break;
-            case "4":
-                String benefits = getInput(Messages.EDIT_FIELD);
-                entry.updateBenefits(benefits);
-                displayEntry(userInput);
-                break;
-        }
+        EditEntry edit = new EditEntry(ioType);
+        edit.editEntry(userInput, data);
+        listData();
     }
 
     public void handleDelete(String userInput){
@@ -160,19 +125,24 @@ public class Program {
         }
     }
 
-    private void displayEntry(String userInput){
+    public static String getEnglishName(Entry entry){
+        return entry.returnEnglishName();
+    };
+
+    private void displayEntry(String userInput ){
         int index = convertToIndex(userInput);
         Entry entry = getEntryFromData(index);
         String entryString = entry.stringify();
         outputString(entryString);
     }
 
+
     private String getInput(Messages message){
         outputMessage(message);
         return ioType.getInput();
     }
 
-    private Entry getEntryFromData(int index){
+    public Entry getEntryFromData(int index){
         return data.get(index);
     }
 
@@ -188,6 +158,7 @@ public class Program {
     private int convertToIndex(String input){
         return Integer.parseInt(input) - 1;
     }
+
 
     private String trimWhitespace(String string) {
         return string.trim();
