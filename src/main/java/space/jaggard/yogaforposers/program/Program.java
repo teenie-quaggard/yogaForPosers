@@ -1,9 +1,6 @@
 package space.jaggard.yogaforposers.program;
 
-import space.jaggard.yogaforposers.commands.AddEntry;
-import space.jaggard.yogaforposers.commands.DeleteEntry;
-import space.jaggard.yogaforposers.commands.EditEntry;
-import space.jaggard.yogaforposers.commands.ListData;
+import space.jaggard.yogaforposers.commands.*;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -100,8 +97,8 @@ public class Program {
     }
 
     public void exitProgram(){
-        outputMessage(Messages.EXIT);
-        System.exit(0);
+        ExitProgram exit = new ExitProgram(ioType);
+        exit.exitProgram();
     }
 
     public void validateNumberOfArguments(String userInput){
