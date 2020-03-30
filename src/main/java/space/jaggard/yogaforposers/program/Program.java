@@ -5,7 +5,6 @@ import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.io.IO;
-import space.jaggard.yogaforposers.validator.Validator;
 
 import java.util.ArrayList;
 
@@ -87,7 +86,7 @@ public class Program {
 
     public void editEntry(String userInput){
         EditEntry edit = new EditEntry(ioType);
-        edit.editEntry(userInput, data);
+        edit.edit(userInput, data);
         listData();
     }
 

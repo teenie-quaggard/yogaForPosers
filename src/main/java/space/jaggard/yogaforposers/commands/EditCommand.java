@@ -3,26 +3,29 @@ package space.jaggard.yogaforposers.commands;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.messages.Messages;
+import space.jaggard.yogaforposers.validator.Validator;
 
 
 import java.util.ArrayList;
 
-public class EditEntry {
+public class EditCommand {
 
     IO ioType;
 
-    public EditEntry(IO ioType){
+    public EditCommand(IO ioType){
         this.ioType = ioType;
     }
 
-    public void editEntry(String userInput, ArrayList<Entry> data){
-
-        if (badArguments(userInput)) {
-           return;
+    public void edit(String userInput, ArrayList<Entry> data){
+        if (Validator.badArguments(userInput)){
+            outputMessage(Messages.INCORRECT_EDIT);
+        } else {
+            editEntry(userInput, data);
         }
+    }
 
+    private void editEntry(String userInput, ArrayList<Entry> data){
         String input = checkIfCorrectEntry(userInput, data);
-
         if (input.equals("Y")) {
             int index = convertToIndex(userInput);
             Entry entry = getEntryFromData(index,  data);
@@ -32,15 +35,6 @@ public class EditEntry {
             outputMessage(Messages.EDIT_WRONG_ENTRY);
         }
     }
-
-    private boolean badArguments(String userInput){
-        if (userInput == null || userInput.equals("")) {
-            outputMessage(Messages.INCORRECT_EDIT);
-            return true;
-        } else {
-            return false;
-        }
-    };
 
     private String checkIfCorrectEntry(String userInput, ArrayList<Entry> data){
         outputMessage(Messages.REVIEW_ENTRY_PROMPT);
