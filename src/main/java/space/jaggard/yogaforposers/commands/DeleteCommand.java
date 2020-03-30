@@ -3,18 +3,27 @@ package space.jaggard.yogaforposers.commands;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.messages.Messages;
+import space.jaggard.yogaforposers.validator.Validator;
 
 import java.util.ArrayList;
 
-public class DeleteEntry {
+public class DeleteCommand {
 
     IO ioType;
 
-    public DeleteEntry(IO ioType){
+    public DeleteCommand(IO ioType){
         this.ioType = ioType;
     }
 
-    public void handleDelete(String userInput, ArrayList<Entry> data){
+    public void delete(String userInput, ArrayList<Entry> data){
+        if (Validator.badArguments(userInput)){
+            outputMessage(Messages.INCORRECT_DEL);
+        } else {
+            handleDelete(userInput, data);
+        }
+    }
+
+    private void handleDelete(String userInput, ArrayList<Entry> data){
         String input = confirmEntryToDelete(userInput, data);
         if (input.equals("Y")) {
             deleteEntry(userInput, data);
@@ -61,7 +70,7 @@ public class DeleteEntry {
         return ioType.getInput();
     }
 
-    public Entry getEntryFromData(int index, ArrayList<Entry> data){
+    private Entry getEntryFromData(int index, ArrayList<Entry> data){
         return data.get(index);
     }
 

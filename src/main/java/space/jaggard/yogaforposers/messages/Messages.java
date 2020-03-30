@@ -59,9 +59,12 @@ public enum Messages {
             "Note that you will be overwriting your saved entry! : \n"),
     EDIT_WRONG_ENTRY("Wrong entry? No problem, let's try again."),
     EDIT_FINISHED("All done!"),
+    INCORRECT_DEL("❌ Sorry, there is something wrong with the way you've " +
+            "made your request. ❌ \nPlease check that you have entered -DEL " +
+            "X, replacing X with the number of the entry you'd like to edit."),
     DELETE_ENTRY("⚠️ Are you sure you'd like to delete this entry? " +
             "(Y/N): ⚠️️"),
-    CONFIRM_DELETE("Entry deleted ❌\n"),
+    CONFIRM_DELETE("Entry deleted 👍🏼\n"),
     UNCONFIRMED_DELETE("No stress, we will save that for later."),
     EXIT("Bye bye! Hope to see you soon! 👋🏼")
     ;

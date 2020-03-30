@@ -74,29 +74,29 @@ public class Program {
     }
 
     public void handleAdd(){
-        AddEntry addEntry = new AddEntry(ioType);
-        addEntry.handleAdd(data);
+        AddCommand addCommand = new AddCommand(ioType);
+        addCommand.handleAdd(data);
         listData();
     }
 
     public void listData() {
-        ListData list = new ListData(ioType);
+        ListCommand list = new ListCommand(ioType);
         list.listData(data);
     }
 
     public void editEntry(String userInput){
-        EditEntry edit = new EditEntry(ioType);
+        EditCommand edit = new EditCommand(ioType);
         edit.edit(userInput, data);
         listData();
     }
 
     public void handleDelete(String userInput){
-        DeleteEntry delete = new DeleteEntry(ioType);
-        delete.handleDelete(userInput, data);
+        DeleteCommand delete = new DeleteCommand(ioType);
+        delete.delete(userInput, data);
     }
 
     public void exitProgram(){
-        ExitProgram exit = new ExitProgram(ioType);
+        ExitCommand exit = new ExitCommand(ioType);
         exit.exitProgram();
     }
 
