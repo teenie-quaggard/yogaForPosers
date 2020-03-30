@@ -1,6 +1,7 @@
 package space.jaggard.yogaforposers.program;
 
 import space.jaggard.yogaforposers.commands.AddEntry;
+import space.jaggard.yogaforposers.commands.DeleteEntry;
 import space.jaggard.yogaforposers.commands.EditEntry;
 import space.jaggard.yogaforposers.commands.ListData;
 import space.jaggard.yogaforposers.entry.Entry;
@@ -94,29 +95,13 @@ public class Program {
     }
 
     public void handleDelete(String userInput){
-        String input = confirmEntryToDelete(userInput);
-        if (input.equals("Y")) {
-            deleteEntry(userInput);
-            outputMessage(Messages.CONFIRM_DELETE);
-        } else {
-            outputMessage(Messages.UNCONFIRMED_DELETE);
-        }
+        DeleteEntry delete = new DeleteEntry(ioType);
+        delete.handleDelete(userInput, data);
     }
 
     public void exitProgram(){
         outputMessage(Messages.EXIT);
         System.exit(0);
-    }
-
-    private String confirmEntryToDelete(String userInput){
-        outputMessage(Messages.REVIEW_ENTRY_PROMPT);
-        displayEntry(userInput);
-        return getInput(Messages.DELETE_ENTRY).toUpperCase();
-    }
-
-    public void deleteEntry(String userInput){
-        int index = convertToIndex(userInput);
-        data.remove( index );
     }
 
     public void validateNumberOfArguments(String userInput){
@@ -128,19 +113,6 @@ public class Program {
     public static String getEnglishName(Entry entry){
         return entry.returnEnglishName();
     };
-
-    private void displayEntry(String userInput ){
-        int index = convertToIndex(userInput);
-        Entry entry = getEntryFromData(index);
-        String entryString = entry.stringify();
-        outputString(entryString);
-    }
-
-
-    private String getInput(Messages message){
-        outputMessage(message);
-        return ioType.getInput();
-    }
 
     public Entry getEntryFromData(int index){
         return data.get(index);
@@ -155,11 +127,6 @@ public class Program {
         return userInput.toUpperCase();
     }
 
-    private int convertToIndex(String input){
-        return Integer.parseInt(input) - 1;
-    }
-
-
     private String trimWhitespace(String string) {
         return string.trim();
     }
@@ -169,8 +136,9 @@ public class Program {
         ioType.print(string);
     }
 
-    private void outputString(String string){
-        ioType.print(string);
+    private String getInput(Messages message){
+        outputMessage(message);
+        return ioType.getInput();
     }
 
 }
