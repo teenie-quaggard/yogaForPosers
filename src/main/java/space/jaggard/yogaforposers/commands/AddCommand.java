@@ -12,15 +12,14 @@ public class AddCommand {
     ArrayList<Entry> data;
     IO ioType;
 
-    public AddCommand(IO ioType, ArrayList<Entry> data){
+    public AddCommand(IO ioType){
         this.ioType = ioType;
-        this.data = data;
     }
 
-    public void handleAdd(){
+    public void handleAdd(ArrayList<Entry> data){
         outputMessage(Messages.ADD_PROMPT);
         Entry entry = createEntry();
-        addEntryToData(entry);
+        addEntryToData(entry, data);
     }
 
     public Entry createEntry(){
@@ -47,7 +46,7 @@ public class AddCommand {
         return englishName;
     }
 
-    private void addEntryToData(Entry entry){
+    private void addEntryToData(Entry entry, ArrayList<Entry> data){
         data.add(0, entry);
         outputMessage(Messages.ADD_FINISHED);
     }

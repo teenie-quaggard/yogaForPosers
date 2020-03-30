@@ -75,8 +75,8 @@ public class Program {
     }
 
     public void handleAdd(){
-        AddCommand addCommand = new AddCommand(ioType, data);
-        addCommand.handleAdd();
+        AddCommand addCommand = new AddCommand(ioType);
+        addCommand.handleAdd(data);
         listData();
     }
 
