@@ -2,7 +2,6 @@ package space.jaggard.yogaforposers.commands;
 
 import org.junit.jupiter.api.Test;
 import space.jaggard.yogaforposers.messages.Messages;
-import space.jaggard.yogaforposers.program.Program;
 import space.jaggard.yogaforposers.program.TestConsole;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddEntryTest {
+class AddCommandTest {
 
     @Test
     void handleAdd() {
@@ -26,7 +25,7 @@ class AddEntryTest {
                 " title"));
 
         TestConsole console = new TestConsole(input);
-        AddEntry add = new AddEntry(console, null);
+        AddCommand add = new AddCommand(console, null);
 
         String addName = Messages.ADD_ENGLISH_NAME.stringify();
         String requiredField = Messages.REQUIRED_FIELD.stringify();

@@ -1,6 +1,6 @@
 package space.jaggard.yogaforposers.program;
 
-import space.jaggard.yogaforposers.commands.AddEntry;
+import space.jaggard.yogaforposers.commands.AddCommand;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -75,8 +75,8 @@ public class Program {
     }
 
     public void handleAdd(){
-        AddEntry addEntry = new AddEntry(ioType, data);
-        addEntry.handleAdd();
+        AddCommand addCommand = new AddCommand(ioType, data);
+        addCommand.handleAdd();
         listData();
     }
 
