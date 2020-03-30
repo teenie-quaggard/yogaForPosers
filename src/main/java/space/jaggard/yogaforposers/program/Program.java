@@ -1,6 +1,7 @@
 package space.jaggard.yogaforposers.program;
 
-import space.jaggard.yogaforposers.commands.AddCommand;
+import space.jaggard.yogaforposers.commands.AddEntry;
+import space.jaggard.yogaforposers.commands.ListData;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -75,23 +76,17 @@ public class Program {
     }
 
     public void handleAdd(){
-        AddCommand addCommand = new AddCommand(ioType);
-        addCommand.handleAdd(data);
+        AddEntry addEntry = new AddEntry(ioType);
+        addEntry.handleAdd(data);
         listData();
     }
 
     public void listData() {
-        if (data.isEmpty()) {
-            outputMessage(Messages.EMPTY_LIST);
-        } else {
-            outputMessage(Messages.LIST_TOP);
-            prependDataWithNumber();
-            outputMessage(Messages.LIST_BOTTOM);
-        }
+        ListData list = new ListData(ioType);
+        list.listData(data);
     }
 
     public void editEntry(String userInput){
-
 
         outputMessage(Messages.REVIEW_ENTRY_PROMPT);
         displayEntry(userInput);
@@ -154,8 +149,6 @@ public class Program {
         return getInput(Messages.DELETE_ENTRY).toUpperCase();
     }
 
-
-
     public void deleteEntry(String userInput){
         int index = convertToIndex(userInput);
         data.remove( index );
@@ -198,13 +191,6 @@ public class Program {
 
     private String trimWhitespace(String string) {
         return string.trim();
-    }
-
-    private void prependDataWithNumber(){
-        for (Entry entry : data) {
-            outputString((data.indexOf(entry) + 1) + ".");
-            outputString(entry.stringify());
-        }
     }
 
     private void outputMessage(Messages message){

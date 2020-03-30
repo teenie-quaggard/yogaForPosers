@@ -7,12 +7,12 @@ import space.jaggard.yogaforposers.validator.Validator;
 
 import java.util.ArrayList;
 
-public class AddCommand {
+public class AddEntry {
 
     ArrayList<Entry> data;
     IO ioType;
 
-    public AddCommand(IO ioType){
+    public AddEntry(IO ioType){
         this.ioType = ioType;
     }
 
