@@ -46,7 +46,7 @@ public class Program {
             entryIndex = parsedInput[1];
         }
 
-        String command = uppercaseInput(parsedInput[0]);
+        String command = parsedInput[0].toUpperCase();
 
         switch(command){
             case "-HELP":
@@ -111,10 +111,6 @@ public class Program {
     private String[] parse(String userInput){
         String input = trimWhitespace(userInput);
         return input.split(" ");
-    }
-
-    private String uppercaseInput(String userInput){
-        return userInput.toUpperCase();
     }
 
     private String trimWhitespace(String string) {

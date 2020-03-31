@@ -3,11 +3,13 @@
  */
 package space.jaggard.yogaforposers;
 
+import space.jaggard.yogaforposers.database.SQLiteDB;
 import space.jaggard.yogaforposers.program.Program;
 
 public class App {
 
     public static void main(String[] args) {
+        SQLiteDB database = new SQLiteDB();
         Program program = new Program();
         program.go();
     }
