@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class App {
 
     public static void main(String[] args) {
-        ProductionDB db = new ProductionDB();
+        ProductionDB db = new ProductionDB(ProductionDB.PRODUCTION);
         ResultSet result;
 
         try {

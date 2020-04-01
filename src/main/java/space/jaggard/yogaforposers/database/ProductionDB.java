@@ -6,6 +6,14 @@ public class ProductionDB implements Database {
 
     private static Connection connection;
     private static boolean hasData = false;
+    private final String connectionString;
+
+    public static String TEST = "jdbc:sqlite:testYogaForPosers.db";
+    public static String PRODUCTION = "jdbc:sqlite:yogaForPosers.db";
+
+    public ProductionDB(String connectionString){
+        this.connectionString = connectionString;
+    }
 
     @Override
     public ResultSet displayEntries() throws SQLException, ClassNotFoundException {
@@ -18,15 +26,13 @@ public class ProductionDB implements Database {
                 "poseType, healthBenefits, imgURL FROM yogaPoses");
     };
 
-    @Override
-    public void connectToDB() throws ClassNotFoundException, SQLException {
+    private void connectToDB() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection("jdbc:sqlite:yogaForPosers.db");
+        connection = DriverManager.getConnection(connectionString);
         initialise();
     }
 
-    @Override
-    public void initialise() throws SQLException {
+    private void initialise() throws SQLException {
         if (!hasData) {
             hasData = true;
 
