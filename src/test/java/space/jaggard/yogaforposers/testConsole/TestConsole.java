@@ -1,4 +1,4 @@
-package space.jaggard.yogaforposers.mockClasses;
+package space.jaggard.yogaforposers.testConsole;
 
 import space.jaggard.yogaforposers.io.IO;
 

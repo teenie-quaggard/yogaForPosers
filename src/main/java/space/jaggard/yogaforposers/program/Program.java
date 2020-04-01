@@ -1,6 +1,8 @@
 package space.jaggard.yogaforposers.program;
 
 import space.jaggard.yogaforposers.commands.*;
+import space.jaggard.yogaforposers.database.Database;
+import space.jaggard.yogaforposers.database.ProductionDB;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -13,15 +15,17 @@ public class Program {
     boolean running;
     IO ioType;
     ArrayList<Entry> data;
+    Database db;
 
     public Program(){
-       this(new Console(), new ArrayList<>());
+       this(new Console(), new ArrayList<>(), new ProductionDB());
     }
 
-    public Program(IO ioType, ArrayList<Entry> data){
+    public Program(IO ioType, ArrayList<Entry> data, Database db){
         this.running = true;
         this.ioType = ioType;
         this.data = data;
+        this.db = db;
     }
 
     public void go(){

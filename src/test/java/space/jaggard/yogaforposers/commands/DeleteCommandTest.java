@@ -1,10 +1,11 @@
 package space.jaggard.yogaforposers.commands;
 
 import org.junit.jupiter.api.Test;
+import space.jaggard.yogaforposers.testDB.TestDB;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.program.Program;
-import space.jaggard.yogaforposers.mockClasses.TestConsole;
+import space.jaggard.yogaforposers.testConsole.TestConsole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ class DeleteCommandTest {
 
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("Y")));
-        Program program = new Program(console, entries);
+        Program program = new Program(console, entries, new TestDB());
         DeleteCommand deleteCommand = new DeleteCommand(console);
 
         deleteCommand.delete("1", entries);
@@ -37,7 +38,7 @@ class DeleteCommandTest {
     void deleteShouldGiveWarningIfPassedTheIncorrectNumberOfArguments(){
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("")));
-        Program program = new Program(console, null);
+        Program program = new Program(console, null, new TestDB());
         DeleteCommand deleteCommand = new DeleteCommand(console);
 
         deleteCommand.delete("", null);

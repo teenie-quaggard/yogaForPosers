@@ -4,7 +4,6 @@
 package space.jaggard.yogaforposers;
 
 import space.jaggard.yogaforposers.database.ProductionDB;
-import space.jaggard.yogaforposers.database.TestDatabase;
 import space.jaggard.yogaforposers.program.Program;
 
 import java.sql.ResultSet;

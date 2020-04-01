@@ -1,8 +1,10 @@
-package space.jaggard.yogaforposers.database;
+package space.jaggard.yogaforposers.testDB;
+
+import space.jaggard.yogaforposers.database.Database;
 
 import java.sql.*;
 
-public class TestDatabase implements Database {
+public class TestDB implements Database {
 
     private static Connection connection;
     private static boolean hasData = false;
