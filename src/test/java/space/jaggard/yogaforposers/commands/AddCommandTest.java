@@ -2,7 +2,7 @@ package space.jaggard.yogaforposers.commands;
 
 import org.junit.jupiter.api.Test;
 import space.jaggard.yogaforposers.messages.Messages;
-import space.jaggard.yogaforposers.program.TestConsole;
+import space.jaggard.yogaforposers.mockClasses.TestConsole;
 
 import java.util.ArrayList;
 import java.util.Arrays;

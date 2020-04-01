@@ -3,6 +3,7 @@ package space.jaggard.yogaforposers.program;
 import org.junit.jupiter.api.Test;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.messages.Messages;
+import space.jaggard.yogaforposers.mockClasses.TestConsole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
