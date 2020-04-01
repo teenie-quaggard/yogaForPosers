@@ -3,6 +3,7 @@
  */
 package space.jaggard.yogaforposers;
 
+import space.jaggard.yogaforposers.database.ProductionDB;
 import space.jaggard.yogaforposers.database.TestDatabase;
 import space.jaggard.yogaforposers.program.Program;
 
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 public class App {
 
     public static void main(String[] args) {
-        TestDatabase db = new TestDatabase();
+        ProductionDB db = new ProductionDB();
         ResultSet result;
 
         try {

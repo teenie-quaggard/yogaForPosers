@@ -2,7 +2,7 @@ package space.jaggard.yogaforposers.database;
 
 import java.sql.*;
 
-public class TestDatabase implements Database {
+public class ProductionDB implements Database {
 
     private static Connection connection;
     private static boolean hasData = false;
