@@ -3,13 +3,34 @@
  */
 package space.jaggard.yogaforposers;
 
-import space.jaggard.yogaforposers.database.SQLiteDB;
+import space.jaggard.yogaforposers.database.TestDatabase;
 import space.jaggard.yogaforposers.program.Program;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class App {
 
     public static void main(String[] args) {
-        SQLiteDB database = new SQLiteDB();
+        TestDatabase db = new TestDatabase();
+        ResultSet result;
+
+        try {
+            result = db.displayEntries();
+            while (result.next()) {
+                System.out.println(
+                        "English name: " + result.getString("englishName") + "\n"
+                                + "Sanskrit name: " + result.getString("sanskritName") + "\n"
+                                + "Pose Type: " + result.getString("poseType") + "\n"
+                                + "Health benefits: " + result.getString("healthBenefits") + "\n"
+                                + "Image URL: " + result.getString("imgURL") + "\n");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
         Program program = new Program();
         program.go();
     }
