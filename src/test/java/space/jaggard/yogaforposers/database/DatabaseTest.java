@@ -5,6 +5,7 @@ import space.jaggard.yogaforposers.entry.Entry;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,7 +31,12 @@ class DatabaseTest {
     }
 
     @Test
-    void displayEntries() throws SQLException, ClassNotFoundException {
+    void getEntries() throws SQLException, ClassNotFoundException {
+        Database db = new Database(Database.TEST_CONNECTION_STRING);
+        db.connectToDB();
+        db.initialiseDummyData();
+        ArrayList<Entry> entries = db.getEntries();
 
+        assertEquals(2, entries.size());
     }
 }

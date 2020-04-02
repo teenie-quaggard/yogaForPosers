@@ -3,6 +3,7 @@ package space.jaggard.yogaforposers.database;
 import space.jaggard.yogaforposers.entry.Entry;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -17,42 +18,39 @@ public class Database {
         this.connectionString = connectionString;
     }
 
-    public ResultSet getEntries() throws SQLException,
-            ClassNotFoundException {
+    public ArrayList<Entry> getEntries() throws SQLException, ClassNotFoundException {
         if (connection == null) {
             connectToDB();
         }
-
-        Statement statement = connection.createStatement();
-        return statement.executeQuery("SELECT englishName, sanskritName, " +
-                "poseType, healthBenefits, imgURL FROM yogaPoses");
-    }
-
-    public void displayEntries() {
-        Database db = new Database(connectionString);
-        ResultSet result;
-
         try {
-            result = db.getEntries();
-            while (result.next()) {
-                System.out.println(
-                        "English name: " + result.getString("englishName") + "\n"
-                                + "Sanskrit name: " + result.getString("sanskritName") + "\n"
-                                + "Pose Type: " + result.getString("poseType") + "\n"
-                                + "Health benefits: " + result.getString("healthBenefits") + "\n"
-                                + "Image URL: " + result.getString("imgURL") + "\n");
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT englishName, " +
+                    "sanskritName, poseType, healthBenefits, imgURL FROM yogaPoses");
+            ArrayList<Entry> resultList = new ArrayList<>();
+
+            while (results.next()) {
+                String englishName = results.getString("englishName");
+                String sanskritName = results.getString("sanskritName");
+                String poseType = results.getString("poseType");
+                String healthBenefits = results.getString(
+                        "healthBenefits");
+
+                Entry entry = new Entry(englishName, sanskritName, poseType,
+                        healthBenefits);
+
+                resultList.add(0, entry);
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            return resultList;
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
+        return null;
     }
 
     public Entry getEntry(int index) throws SQLException, ClassNotFoundException {
         if (connection == null) {
             connectToDB();
         }
-
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT englishName, " +
@@ -73,16 +71,12 @@ public class Database {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-
         return null;
     }
-
-
 
     public void connectToDB() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection(connectionString);
-//        initialise();
     }
 
     public void initialiseDummyData() throws SQLException {
