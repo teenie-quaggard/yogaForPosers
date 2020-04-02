@@ -50,4 +50,6 @@ public class Entry {
 
     public String getImgURL() { return imgURL; }
 
+    public String getID() { return id.toString(); }
+
 }
