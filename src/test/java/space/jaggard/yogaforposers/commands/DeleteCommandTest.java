@@ -17,9 +17,9 @@ class DeleteCommandTest {
     @Test
     void deleteShouldDeleteAnEntryAtASpecificIndex() {
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         Entry entry2 = new Entry("Corpse pose", "Savasana",
-                "Relaxation", "Focus");
+                "Relaxation", "Focus", "");
         ArrayList<Entry> entries =
                 new ArrayList<>(Arrays.asList(entry, entry2));
 

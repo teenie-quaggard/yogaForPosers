@@ -26,7 +26,7 @@ public class AddCommand {
         String sanskritName = getInput(Messages.ADD_SANSKRIT_NAME);
         String poseType = getInput(Messages.ADD_POSE_TYPE);
         String benefits = getInput(Messages.ADD_BENEFITS);
-        return new Entry(englishName, sanskritName, poseType, benefits);
+        return new Entry(englishName, sanskritName, poseType, benefits, "");
     }
 
     public String getRequiredEnglishName(){

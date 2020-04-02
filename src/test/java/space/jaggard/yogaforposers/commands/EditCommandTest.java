@@ -17,7 +17,7 @@ class EditCommandTest {
     @Test
     void editShouldAllowAUserToEditASpecificField() {
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         ArrayList<Entry> entries =
                 new ArrayList<>(Arrays.asList(entry));
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Y", "1", "New title"));

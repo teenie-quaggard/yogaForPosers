@@ -18,6 +18,32 @@ public class Database {
         this.connectionString = connectionString;
     }
 
+    public void addEntry(Entry entry) throws SQLException,
+            ClassNotFoundException {
+        if (connection == null) {
+            connectToDB();
+        }
+        try {
+            Statement statement = connection.createStatement();
+
+            String englishName = entry.getEnglishName();
+            String sanskritName = entry.getSanskritName();
+            String poseType = entry.getPoseType();
+            String healthBenefits = entry.getHealthBenefits();
+            String imgURL = entry.getImgURL();
+
+            int addEntry = statement.executeUpdate(
+                    "INSERT INTO yogaPoses "
+                            + "(englishName, sanskritName, poseType, healthBenefits, imgURL) "
+                            + "VALUES('" + englishName + "', '" + sanskritName + "', '"
+                            + poseType + "', '" + healthBenefits + "', " + imgURL + "');");
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+    }
+
     public ArrayList<Entry> getEntries() throws SQLException, ClassNotFoundException {
         if (connection == null) {
             connectToDB();
@@ -34,9 +60,10 @@ public class Database {
                 String poseType = results.getString("poseType");
                 String healthBenefits = results.getString(
                         "healthBenefits");
+                String imgURL  = results.getString("imgURL");
 
                 Entry entry = new Entry(englishName, sanskritName, poseType,
-                        healthBenefits);
+                        healthBenefits, imgURL);
 
                 resultList.add(0, entry);
             }
@@ -47,7 +74,7 @@ public class Database {
         return null;
     }
 
-    public Entry getEntry(int index) throws SQLException, ClassNotFoundException {
+    public Entry getEntry(int id) throws SQLException, ClassNotFoundException {
         if (connection == null) {
             connectToDB();
         }
@@ -55,7 +82,7 @@ public class Database {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT englishName, " +
                     "sanskritName, " +
-                    "poseType, healthBenefits, imgURL FROM yogaPoses WHERE id ='" + index + "'");
+                    "poseType, healthBenefits, imgURL FROM yogaPoses WHERE id ='" + id + "'");
 
             boolean resultSet = result.next();
 
@@ -65,8 +92,10 @@ public class Database {
                 String poseType = result.getString("poseType");
                 String healthBenefits = result.getString(
                         "healthBenefits");
+                String imgURL  = result.getString("imgURL");
 
-                return new Entry(englishName, sanskritName, poseType, healthBenefits);
+                return new Entry(englishName, sanskritName, poseType,
+                        healthBenefits, imgURL);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
