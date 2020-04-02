@@ -1,7 +1,7 @@
 package space.jaggard.yogaforposers.program;
 
 import org.junit.jupiter.api.Test;
-import space.jaggard.yogaforposers.testDB.TestDB;
+import space.jaggard.yogaforposers.database.Database;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.testConsole.TestConsole;
@@ -18,7 +18,8 @@ class ProgramTest {
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Pigeon pose"
                 , "Eka Pada Rajakapotasana", "Hip opener", "Opens hip joint"));
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, new ArrayList<>(), new TestDB());
+        Program program = new Program(console, new ArrayList<>(),
+                new Database(Database.TEST_CONNECTION_STRING));
 
         String addMsg = Messages.ADD_PROMPT.stringify();
         String englishNameMsg = Messages.ADD_ENGLISH_NAME.stringify();
@@ -48,7 +49,7 @@ class ProgramTest {
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Pigeon pose"
                 , "Eka Pada Rajakapotasana", "Hip opener", "Opens hip joint"));
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, new ArrayList<>(), new TestDB());
+        Program program = new Program(console, new ArrayList<>(), new Database(Database.TEST_CONNECTION_STRING));
 
         program.handleAdd();
 
@@ -58,7 +59,7 @@ class ProgramTest {
     @Test
     void listDataPrintsMessageIfDataIsEmpty(){
         TestConsole console = new TestConsole(null);
-        Program program = new Program(console, new ArrayList<>(), new TestDB());
+        Program program = new Program(console, new ArrayList<>(), new Database(Database.TEST_CONNECTION_STRING));
         String emptyListMsg = Messages.EMPTY_LIST.stringify();
         program.listData();
 
@@ -73,7 +74,7 @@ class ProgramTest {
         Entry entry2 = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
                 "Hip opener", "Opens hip joint");
         ArrayList entries = new ArrayList<>(Arrays.asList(entry, entry2));
-        Program program = new Program(console, entries, new TestDB());
+        Program program = new Program(console, entries, new Database(Database.TEST_CONNECTION_STRING));
 
         String listTop = Messages.LIST_TOP.stringify();
         String listBottom = Messages.LIST_BOTTOM.stringify();
@@ -104,7 +105,7 @@ class ProgramTest {
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
                 "Hip opener", "Opens hip joint");
         Program program = new Program(console,
-                new ArrayList<>(Arrays.asList(entry)), new TestDB());
+                new ArrayList<>(Arrays.asList(entry)), new Database(Database.TEST_CONNECTION_STRING));
 
         String reviewMsg = Messages.REVIEW_ENTRY_PROMPT.stringify();
         String confirmDeleteMsg = Messages.DELETE_ENTRY.stringify();
@@ -129,7 +130,7 @@ class ProgramTest {
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
                 "Hip opener", "Opens hip joint");
         Program program = new Program(console,
-                new ArrayList<>(Arrays.asList(entry)), new TestDB());
+                new ArrayList<>(Arrays.asList(entry)), new Database(Database.TEST_CONNECTION_STRING));
 
         String reviewMsg = Messages.REVIEW_ENTRY_PROMPT.stringify();
         String confirmDeleteMsg = Messages.DELETE_ENTRY.stringify();
@@ -160,7 +161,7 @@ class ProgramTest {
 
         Program program = new Program(console,
                 new ArrayList<>(Arrays.asList(entry, entry2)),
-                new TestDB());
+                new Database(Database.TEST_CONNECTION_STRING));
 
         program.handleDelete("1");
 
@@ -177,7 +178,7 @@ class ProgramTest {
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Y", "1", "New title"));
 
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, entries, new TestDB());
+        Program program = new Program(console, entries, new Database(Database.TEST_CONNECTION_STRING));
 
         program.editEntry("1");
         Entry editedEntry = program.getEntryFromData(0);

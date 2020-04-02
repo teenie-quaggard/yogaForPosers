@@ -2,7 +2,6 @@ package space.jaggard.yogaforposers.program;
 
 import space.jaggard.yogaforposers.commands.*;
 import space.jaggard.yogaforposers.database.Database;
-import space.jaggard.yogaforposers.database.ProductionDB;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -18,7 +17,7 @@ public class Program {
     Database db;
 
     public Program(){
-       this(new Console(), new ArrayList<>(), new ProductionDB(ProductionDB.PRODUCTION));
+       this(new Console(), new ArrayList<>(), new Database(Database.PRODUCTION_CONNECTION_STRING));
     }
 
     public Program(IO ioType, ArrayList<Entry> data, Database db){
@@ -105,7 +104,7 @@ public class Program {
     }
 
     public static String getEnglishName(Entry entry){
-        return entry.returnEnglishName();
+        return entry.getEnglishName();
     };
 
     public Entry getEntryFromData(int index){

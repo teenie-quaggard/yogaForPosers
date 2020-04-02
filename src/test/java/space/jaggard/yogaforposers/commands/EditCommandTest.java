@@ -1,7 +1,7 @@
 package space.jaggard.yogaforposers.commands;
 
 import org.junit.jupiter.api.Test;
-import space.jaggard.yogaforposers.testDB.TestDB;
+import space.jaggard.yogaforposers.database.Database;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.program.Program;
@@ -22,7 +22,7 @@ class EditCommandTest {
                 new ArrayList<>(Arrays.asList(entry));
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Y", "1", "New title"));
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, entries, new TestDB());
+        Program program = new Program(console, entries, new Database(Database.TEST_CONNECTION_STRING));
         EditCommand editCommand = new EditCommand(console);
 
         editCommand.edit("1", entries);
