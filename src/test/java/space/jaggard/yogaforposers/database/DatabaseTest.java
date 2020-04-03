@@ -39,12 +39,12 @@ class DatabaseTest {
 
     @Test
     void getEntry() throws SQLException, ClassNotFoundException {
-
         database.initialiseDummyData();
         Entry entry = database.getEntry(0);
         String entryName = entry.getEnglishName();
 
         assertEquals("Pigeon Pose", entryName);
+
     }
 //
 //    @Test

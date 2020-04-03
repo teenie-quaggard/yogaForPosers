@@ -103,7 +103,8 @@ public class Database {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT englishName, " +
                     "sanskritName, " +
-                    "poseType, healthBenefits, imgURL FROM yogaPoses WHERE id ='" + id + "'");
+                    "poseType, healthBenefits, imgURL FROM yogaPoses WHERE id" +
+                    " ='" + id + "';");
 
             boolean resultSet = result.next();
 
