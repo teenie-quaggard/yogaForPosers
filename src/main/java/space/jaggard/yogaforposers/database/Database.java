@@ -1,6 +1,8 @@
 package space.jaggard.yogaforposers.database;
 
 import space.jaggard.yogaforposers.entry.Entry;
+import space.jaggard.yogaforposers.io.Console;
+import space.jaggard.yogaforposers.io.IO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,12 +12,18 @@ public class Database {
     private static Connection connection;
     private static boolean hasData = false;
     private final String connectionString;
+    IO ioType;
 
     public static String TEST_CONNECTION_STRING = "jdbc:sqlite:testYogaForPosers.db";
     public static String PRODUCTION_CONNECTION_STRING = "jdbc:sqlite:yogaForPosers.db";
 
-    public Database(String connectionString){
+    public Database(){
+        this(PRODUCTION_CONNECTION_STRING, new Console());
+    }
+
+    public Database(String connectionString, IO ioType){
         this.connectionString = connectionString;
+        this.ioType = ioType;
     }
 
     public void addEntry(Entry entry) throws SQLException,
@@ -36,7 +44,7 @@ public class Database {
                     "INSERT INTO yogaPoses "
                             + "(englishName, sanskritName, poseType, healthBenefits, imgURL) "
                             + "VALUES('" + englishName + "', '" + sanskritName + "', '"
-                            + poseType + "', '" + healthBenefits + "', " + imgURL + "');");
+                            + poseType + "', '" + healthBenefits + "', '" + imgURL + "');");
 
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -51,7 +59,8 @@ public class Database {
         try {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT englishName, " +
-                    "sanskritName, poseType, healthBenefits, imgURL FROM yogaPoses");
+                    "sanskritName, poseType, healthBenefits, imgURL FROM " +
+                    "yogaPoses;");
             ArrayList<Entry> resultList = new ArrayList<>();
 
             while (results.next()) {
@@ -81,8 +90,7 @@ public class Database {
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT englishName, " +
-                    "sanskritName, " +
-                    "poseType, healthBenefits, imgURL FROM yogaPoses WHERE id ='" + id + "'");
+                    "sanskritName, poseType, healthBenefits, imgURL FROM yogaPoses WHERE id ='" + id + "'");
 
             boolean resultSet = result.next();
 
