@@ -42,6 +42,6 @@ class DatabaseTest {
         db.initialiseDummyData();
         ArrayList<Entry> entries = db.getEntries();
 
-        assertEquals(2, entries.size());
+        assertEquals(3, entries.size());
     }
 }

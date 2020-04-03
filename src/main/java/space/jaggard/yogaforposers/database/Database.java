@@ -26,11 +26,8 @@ public class Database {
         this.ioType = ioType;
     }
 
-    public void addEntry(Entry entry) throws SQLException,
-            ClassNotFoundException {
-        if (connection == null) {
-            connectToDB();
-        }
+    public void addEntry(Entry entry) throws SQLException, ClassNotFoundException {
+        connectToDB();
         try {
             Statement statement = connection.createStatement();
 
@@ -53,9 +50,7 @@ public class Database {
     }
 
     public ArrayList<Entry> getEntries() throws SQLException, ClassNotFoundException {
-        if (connection == null) {
-            connectToDB();
-        }
+        connectToDB();
         try {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT englishName, " +
@@ -84,9 +79,7 @@ public class Database {
     }
 
     public Entry getEntry(int id) throws SQLException, ClassNotFoundException {
-        if (connection == null) {
-            connectToDB();
-        }
+        connectToDB();
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT englishName, " +
@@ -112,8 +105,18 @@ public class Database {
     }
 
     public void connectToDB() throws ClassNotFoundException, SQLException {
-        Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection(connectionString);
+        if (connection == null) {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection(connectionString);
+        }
+    }
+
+    public void closeConnection(){
+        try {
+            connection.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void initialiseDummyData() throws SQLException {
