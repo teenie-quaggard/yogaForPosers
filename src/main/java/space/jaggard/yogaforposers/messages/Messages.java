@@ -1,6 +1,6 @@
 package space.jaggard.yogaforposers.messages;
 
-import space.jaggard.yogaforposers.commands.Commands;
+import space.jaggard.yogaforposers.commands.CommandsEnum;
 
 public enum Messages {
     GREETING("\n--------------------\n 🙏🏼 Nameste yogi 🙏🏼 " +
@@ -12,15 +12,15 @@ public enum Messages {
             "the list of available commands:"),
     MENU(" \nMENU\n" +
             "-----------------------------------------------------------------------\n" +
-            Commands.ADD.stringify() +
+            CommandsEnum.ADD.stringify() +
             "     | 👆 to add an entry to your saved list of yoga poses\n" +
-            Commands.LIST.stringify() +
+            CommandsEnum.LIST.stringify() +
             "    | 🔭 to see what you have already saved to your list\n" +
-            Commands.EDIT.stringify() +
+            CommandsEnum.EDIT.stringify() +
             "  | ✂️ to edit an entry, where X is the number of the entry️\n" +
-            Commands.DEL.stringify() +
+            CommandsEnum.DEL.stringify() +
             "   | ❌ to delete an entry, where X is the number of the entry\n" +
-            Commands.EXIT.stringify() +
+            CommandsEnum.EXIT.stringify() +
             "    | ✌️ to close the program (FYI - you'll lose your data!)\n" +
             "-----------------------------------------------------------------------\n"
             ),

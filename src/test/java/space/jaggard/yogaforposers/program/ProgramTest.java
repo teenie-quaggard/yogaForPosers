@@ -1,8 +1,10 @@
 package space.jaggard.yogaforposers.program;
 
 import org.junit.jupiter.api.Test;
+import space.jaggard.yogaforposers.database.Database;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.messages.Messages;
+import space.jaggard.yogaforposers.testConsole.TestConsole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +18,8 @@ class ProgramTest {
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Pigeon pose"
                 , "Eka Pada Rajakapotasana", "Hip opener", "Opens hip joint"));
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, new ArrayList<>());
+        Program program = new Program(console, new ArrayList<>(),
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         String addMsg = Messages.ADD_PROMPT.stringify();
         String englishNameMsg = Messages.ADD_ENGLISH_NAME.stringify();
@@ -46,7 +49,8 @@ class ProgramTest {
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Pigeon pose"
                 , "Eka Pada Rajakapotasana", "Hip opener", "Opens hip joint"));
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, new ArrayList<>());
+        Program program = new Program(console, new ArrayList<>(),
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         program.handleAdd();
 
@@ -56,7 +60,8 @@ class ProgramTest {
     @Test
     void listDataPrintsMessageIfDataIsEmpty(){
         TestConsole console = new TestConsole(null);
-        Program program = new Program(console, new ArrayList<>());
+        Program program = new Program(console, new ArrayList<>(),
+                new Database(Database.TEST_CONNECTION_STRING, console));
         String emptyListMsg = Messages.EMPTY_LIST.stringify();
         program.listData();
 
@@ -67,11 +72,13 @@ class ProgramTest {
     void listDataPrependsEachEntryWithNumber(){
         TestConsole console = new TestConsole(null);
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         Entry entry2 = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
-        Program program = new Program(console,
-                new ArrayList<>(Arrays.asList(entry, entry2)));
+                "Hip opener", "Opens hip joint", "");
+        ArrayList<Entry> entries = new ArrayList<>(Arrays.asList(entry,
+                entry2));
+        Program program = new Program(console, entries,
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         String listTop = Messages.LIST_TOP.stringify();
         String listBottom = Messages.LIST_BOTTOM.stringify();
@@ -100,9 +107,10 @@ class ProgramTest {
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("N")));
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         Program program = new Program(console,
-                new ArrayList<>(Arrays.asList(entry)));
+                new ArrayList<>(Arrays.asList(entry)),
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         String reviewMsg = Messages.REVIEW_ENTRY_PROMPT.stringify();
         String confirmDeleteMsg = Messages.DELETE_ENTRY.stringify();
@@ -125,9 +133,10 @@ class ProgramTest {
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("Y")));
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         Program program = new Program(console,
-                new ArrayList<>(Arrays.asList(entry)));
+                new ArrayList<>(Arrays.asList(entry)),
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         String reviewMsg = Messages.REVIEW_ENTRY_PROMPT.stringify();
         String confirmDeleteMsg = Messages.DELETE_ENTRY.stringify();
@@ -152,12 +161,13 @@ class ProgramTest {
                 new TestConsole(new ArrayList<>(Arrays.asList("Y")));
 
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         Entry entry2 = new Entry("Corpse pose", "Savasana",
-                "Relaxation", "Focus");
+                "Relaxation", "Focus", "");
 
         Program program = new Program(console,
-                new ArrayList<>(Arrays.asList(entry, entry2)));
+                new ArrayList<>(Arrays.asList(entry, entry2)),
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         program.handleDelete("1");
 
@@ -168,13 +178,14 @@ class ProgramTest {
     @Test
     void editEntryEditsASelectedEntry(){
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         ArrayList<Entry> entries =
                 new ArrayList<>(Arrays.asList(entry));
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Y", "1", "New title"));
 
         TestConsole console = new TestConsole(input);
-        Program program = new Program(console, entries);
+        Program program = new Program(console, entries,
+                new Database(Database.TEST_CONNECTION_STRING, console));
 
         program.editEntry("1");
         Entry editedEntry = program.getEntryFromData(0);
@@ -185,7 +196,7 @@ class ProgramTest {
     @Test
     void getFieldFromEntry(){
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         String fieldName = "englishName";
 
         assertEquals("Pigeon pose", Program.getEnglishName(entry));

@@ -1,6 +1,6 @@
 package space.jaggard.yogaforposers.commands;
 
-public enum Commands {
+public enum CommandsEnum {
     ADD("-ADD"),
     LIST("-LIST"),
     EDIT("-EDIT X"),
@@ -8,7 +8,7 @@ public enum Commands {
     EXIT("-EXIT");
 
     private String command;
-    Commands(String command) { this.command = command; }
+    CommandsEnum(String command) { this.command = command; }
 
     public String stringify() { return command; }
 

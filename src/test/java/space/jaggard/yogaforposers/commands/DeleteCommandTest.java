@@ -1,10 +1,11 @@
 package space.jaggard.yogaforposers.commands;
 
 import org.junit.jupiter.api.Test;
+import space.jaggard.yogaforposers.database.Database;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.program.Program;
-import space.jaggard.yogaforposers.program.TestConsole;
+import space.jaggard.yogaforposers.testConsole.TestConsole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,15 +17,16 @@ class DeleteCommandTest {
     @Test
     void deleteShouldDeleteAnEntryAtASpecificIndex() {
         Entry entry = new Entry("Pigeon pose", "Eka Pada Rajakapotasana",
-                "Hip opener", "Opens hip joint");
+                "Hip opener", "Opens hip joint", "");
         Entry entry2 = new Entry("Corpse pose", "Savasana",
-                "Relaxation", "Focus");
+                "Relaxation", "Focus", "");
         ArrayList<Entry> entries =
                 new ArrayList<>(Arrays.asList(entry, entry2));
 
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("Y")));
-        Program program = new Program(console, entries);
+        Program program = new Program(console, entries,
+                new Database(Database.TEST_CONNECTION_STRING, console));
         DeleteCommand deleteCommand = new DeleteCommand(console);
 
         deleteCommand.delete("1", entries);
@@ -37,7 +39,8 @@ class DeleteCommandTest {
     void deleteShouldGiveWarningIfPassedTheIncorrectNumberOfArguments(){
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("")));
-        Program program = new Program(console, null);
+        Program program = new Program(console, null,
+                new Database(Database.TEST_CONNECTION_STRING, console));
         DeleteCommand deleteCommand = new DeleteCommand(console);
 
         deleteCommand.delete("", null);

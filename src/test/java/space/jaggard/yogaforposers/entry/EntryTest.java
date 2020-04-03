@@ -9,7 +9,7 @@ class EntryTest {
     @Test
     void createEntryGeneratesANewEntry(){
         Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana",
-                "Hip opener",  "Opens the hip joint");
+                "Hip opener",  "Opens the hip joint", "");
 
         assertEquals("---------------------------------------------\n" +
                         "ENGLISH NAME: Pigeon Pose\n" +

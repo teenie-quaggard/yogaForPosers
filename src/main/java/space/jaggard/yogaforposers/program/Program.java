@@ -1,6 +1,7 @@
 package space.jaggard.yogaforposers.program;
 
 import space.jaggard.yogaforposers.commands.*;
+import space.jaggard.yogaforposers.database.Database;
 import space.jaggard.yogaforposers.entry.Entry;
 import space.jaggard.yogaforposers.io.Console;
 import space.jaggard.yogaforposers.messages.Messages;
@@ -13,15 +14,19 @@ public class Program {
     boolean running;
     IO ioType;
     ArrayList<Entry> data;
+    Database db;
 
     public Program(){
-       this(new Console(), new ArrayList<>());
+       this(new Console(), new ArrayList<>(),
+               new Database(Database.PRODUCTION_CONNECTION_STRING,
+                       new Console()));
     }
 
-    public Program(IO ioType, ArrayList<Entry> data){
+    public Program(IO ioType, ArrayList<Entry> data, Database db){
         this.running = true;
         this.ioType = ioType;
         this.data = data;
+        this.db = db;
     }
 
     public void go(){
@@ -46,7 +51,7 @@ public class Program {
             entryIndex = parsedInput[1];
         }
 
-        String command = uppercaseInput(parsedInput[0]);
+        String command = parsedInput[0].toUpperCase();
 
         switch(command){
             case "-HELP":
@@ -101,7 +106,7 @@ public class Program {
     }
 
     public static String getEnglishName(Entry entry){
-        return entry.returnEnglishName();
+        return entry.getEnglishName();
     };
 
     public Entry getEntryFromData(int index){
@@ -111,10 +116,6 @@ public class Program {
     private String[] parse(String userInput){
         String input = trimWhitespace(userInput);
         return input.split(" ");
-    }
-
-    private String uppercaseInput(String userInput){
-        return userInput.toUpperCase();
     }
 
     private String trimWhitespace(String string) {
