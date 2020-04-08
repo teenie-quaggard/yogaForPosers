@@ -1,41 +1,48 @@
 package space.jaggard.yogaforposers.database;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import space.jaggard.yogaforposers.entry.Entry;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DatabaseTest {
 
-    private Database database;
+    private static Database database;
+    private static Connection connection;
 
-    @BeforeEach
-    private void setUp() throws SQLException, ClassNotFoundException {
+    @BeforeAll
+    private static void connectToTestDB() {
         database = new Database(Database.TEST_CONNECTION_STRING);
-        System.out.println("Database initialised");
+        database.connect();
+        database.createTable();
     }
 
     @AfterEach
-    private void tearDownDatabase() throws SQLException, ClassNotFoundException {
-        System.out.println("Wiping test database.");
-        database.clearDB();
+    private void clearEntries(){
+        database.clearTable();
     }
 
-    @Test
-    void addEntry() throws SQLException, ClassNotFoundException {
+    @AfterAll
+    private static void endTestDB() {
+        database.dropTable();
+        database.closeConnection();
+    }
+
+    void addDummyEntry() throws SQLException, ClassNotFoundException {
         Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana", "Hip " +
                 "opener", "Opens hip joint", "");
 
         database.addEntry(entry);
+    }
 
-        assertEquals(1, database.countDatabaseEntries());
+    @Test
+    void addEntry() throws SQLException, ClassNotFoundException {
+        addDummyEntry();
+        assertEquals(1, database.countEntries());
     }
 
     @Test
@@ -51,25 +58,31 @@ class DatabaseTest {
 
         assertEquals("Pigeon Pose", entryName);
     }
-//
-//    @Test
-//    void getEntries() throws SQLException, ClassNotFoundException {
-//
-//        database.initialiseDummyData();
-//        ArrayList<Entry> entries = database.getEntries();
-//
-//        assertEquals(2, entries.size());
-//    }
 
-//    @Test
-//    void clearDB() throws SQLException, ClassNotFoundException {
-//        Database db = new Database(Database.TEST_CONNECTION_STRING);
-//        db.connectToDB();
-//        db.initialiseDummyData();
-//        ArrayList<Entry> entries = db.getEntries();
-//
-//        db.clearDB();
-//
-//        assertEquals(0, entries.size());
-//    }
+    @Test
+    void getEntries() throws SQLException, ClassNotFoundException {
+        addDummyEntry();
+        addDummyEntry();
+
+        ArrayList<Entry> entries = database.getEntries();
+        assertEquals(2, entries.size());
+    }
+
+    @Test
+    void clearTable() throws SQLException, ClassNotFoundException {
+        addDummyEntry();
+        database.clearTable();
+        int zeroEntries = 0;
+
+        assertEquals(zeroEntries, database.countEntries());
+    }
+
+    @Test
+    void countEntries () throws SQLException, ClassNotFoundException {
+        addDummyEntry();
+        addDummyEntry();
+
+        assertEquals(2, database.countEntries());
+    }
+
 }
