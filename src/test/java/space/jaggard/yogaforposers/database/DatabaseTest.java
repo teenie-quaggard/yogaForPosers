@@ -2,6 +2,7 @@ package space.jaggard.yogaforposers.database;
 
 import org.junit.jupiter.api.*;
 import space.jaggard.yogaforposers.entry.Entry;
+import space.jaggard.yogaforposers.testConsole.TestConsole;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,12 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DatabaseTest {
 
+
     private static Database database;
     private static Connection connection;
 
     @BeforeAll
     private static void connectToTestDB() {
-        database = new Database(Database.TEST_CONNECTION_STRING);
+        TestConsole console = new TestConsole(null);
+        database = new Database(Database.TEST_CONNECTION_STRING, console);
         database.connect();
         database.createTable();
     }

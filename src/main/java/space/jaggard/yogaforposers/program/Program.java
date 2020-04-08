@@ -17,7 +17,9 @@ public class Program {
     Database db;
 
     public Program(){
-       this(new Console(), new ArrayList<>(), new Database(Database.PRODUCTION_CONNECTION_STRING));
+       this(new Console(), new ArrayList<>(),
+               new Database(Database.PRODUCTION_CONNECTION_STRING,
+                       new Console()));
     }
 
     public Program(IO ioType, ArrayList<Entry> data, Database db){

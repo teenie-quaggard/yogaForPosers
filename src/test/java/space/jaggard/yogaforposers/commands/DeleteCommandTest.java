@@ -25,7 +25,8 @@ class DeleteCommandTest {
 
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("Y")));
-        Program program = new Program(console, entries, new Database(Database.TEST_CONNECTION_STRING));
+        Program program = new Program(console, entries,
+                new Database(Database.TEST_CONNECTION_STRING, console));
         DeleteCommand deleteCommand = new DeleteCommand(console);
 
         deleteCommand.delete("1", entries);
@@ -38,7 +39,8 @@ class DeleteCommandTest {
     void deleteShouldGiveWarningIfPassedTheIncorrectNumberOfArguments(){
         TestConsole console =
                 new TestConsole(new ArrayList<>(Arrays.asList("")));
-        Program program = new Program(console, null, new Database(Database.TEST_CONNECTION_STRING));
+        Program program = new Program(console, null,
+                new Database(Database.TEST_CONNECTION_STRING, console));
         DeleteCommand deleteCommand = new DeleteCommand(console);
 
         deleteCommand.delete("", null);

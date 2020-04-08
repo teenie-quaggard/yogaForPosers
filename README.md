@@ -60,11 +60,8 @@ If using Gradle, use the command ```./gradlew test``` while within the root
 - Project lacks testing for randomized UUID (used as Entry ID) - this can
  potentially be side-stepped by refactoring and instead using a static Counter
   class to create unique IDs which are more human readable than UUID
-- Program class should be refactored as at the moment it is holding basically
- all of the logic. Commands and their dependent methods should be refactored
-  out into their own classes and should include unit tests for all their methods.
-- Better validation should be implemented throughout the program
-- Small UI improvements throughout
+- Database is not rebuilding between tests
+- Database is not yet connected to app as a whole
 
  ## Things I learned
  - How to implement the [Maven Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
@@ -81,8 +78,7 @@ If using Gradle, use the command ```./gradlew test``` while within the root
    with in the long run, even though it initially seemed better for testing
     to store them as strings.
 - The refactor tool in IntelliJ is indispensable! 
-- The difference between private and public methods
-- That you should delete all your unit tests after creating integration tests
+- The difference between private and public methods 
  
  ## Things I struggled with
 - Implementing a design that stays within the scope of the stories, but is
@@ -96,4 +92,6 @@ If using Gradle, use the command ```./gradlew test``` while within the root
   test fail before continuing on through the TDD cycle
 - Moving too quickly through the stories without testing for edge-cases
 - Branching and committing at appropriate points
- 
+
+- Adding the JBDC driver to the gradle build file
+- Null pointer error when working with a database

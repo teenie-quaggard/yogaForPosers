@@ -1,6 +1,8 @@
 package space.jaggard.yogaforposers.database;
 
 import space.jaggard.yogaforposers.entry.Entry;
+import space.jaggard.yogaforposers.io.Console;
+import space.jaggard.yogaforposers.io.IO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,12 +11,19 @@ public class Database {
 
     private final String connectionString;
     private static Connection connection;
+    IO ioType;
 
     public static String TEST_CONNECTION_STRING = "jdbc:sqlite:testYogaForPosers.db";
     public static String PRODUCTION_CONNECTION_STRING = "jdbc:sqlite:yogaForPosers.db";
 
-    public Database(String connectionString) {
+
+    public Database(){
+        this(PRODUCTION_CONNECTION_STRING, new Console());
+    }
+
+    public Database(String connectionString, IO ioType){
         this.connectionString = connectionString;
+        this.ioType = ioType;
     }
 
     public void connect() {
@@ -24,7 +33,7 @@ public class Database {
                 connection = DriverManager.getConnection(connectionString);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -36,7 +45,7 @@ public class Database {
                     "englishName text, sanskritName text, poseType text, " +
                     "healthBenefits text, imgURL text, primary key(id));");
         } catch (SQLException e){
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -58,7 +67,7 @@ public class Database {
                             sanskritName + "', '" + poseType + "', '" + healthBenefits + "', '" + imgURL + "');");
             statement.close();
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -87,7 +96,7 @@ public class Database {
                 entryResults.add(entry);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
         return entryResults;
@@ -100,7 +109,6 @@ public class Database {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("SELECT englishName, " +
                     "sanskritName, poseType, healthBenefits, imgURL FROM yogaPoses");
-
             while (results.next()) {
                 String englishName = results.getString("englishName");
                 String sanskritName = results.getString("sanskritName");
@@ -117,7 +125,7 @@ public class Database {
             statement.close();
             return resultList;
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
         return resultList;
@@ -129,19 +137,18 @@ public class Database {
             statement.execute("DELETE FROM yogaPoses;");
             statement.close();
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
 
-    public void dropTable()  {
+    public void dropTable() {
         try {
             Statement statement = connection.createStatement();
             statement.execute("DROP TABLE yogaPoses;");
             statement.close();
         } catch (Exception e) {
-            System.out.println("Error: " + e);
-            e.printStackTrace();
+            ioType.print("Error: " + e);
         }
     }
 
@@ -149,7 +156,7 @@ public class Database {
         try{
             connection.close();
         }  catch (Exception e) {
-            System.out.println("Error: " + e);
+            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -168,7 +175,5 @@ public class Database {
         }
         return numberOfEntries;
     }
-
-
 
 }
