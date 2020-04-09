@@ -5,7 +5,6 @@ import space.jaggard.yogaforposers.io.IO;
 import space.jaggard.yogaforposers.messages.Messages;
 import space.jaggard.yogaforposers.validator.Validator;
 
-import java.util.ArrayList;
 
 public class AddCommand {
 
@@ -18,7 +17,6 @@ public class AddCommand {
     public Entry handleAdd(){
         outputMessage(Messages.ADD_PROMPT);
         return createEntry();
-        //addEntryToData(entry, data);
     }
 
     public Entry createEntry(){
@@ -43,11 +41,6 @@ public class AddCommand {
             }
         }
         return englishName;
-    }
-
-    private void addEntryToData(Entry entry, ArrayList<Entry> data){
-        data.add(0, entry);
-        outputMessage(Messages.ADD_FINISHED);
     }
 
     private void outputMessage(Messages message){
