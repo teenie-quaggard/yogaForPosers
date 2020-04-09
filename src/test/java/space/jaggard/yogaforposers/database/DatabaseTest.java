@@ -35,7 +35,7 @@ class DatabaseTest {
         database.closeConnection();
     }
 
-    void addDummyEntry() throws SQLException, ClassNotFoundException {
+    void addDummyEntry() {
         Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana", "Hip " +
                 "opener", "Opens hip joint", "");
 
@@ -49,7 +49,7 @@ class DatabaseTest {
     }
 
     @Test
-    void getEntry() throws SQLException, ClassNotFoundException {
+    void getEntry() {
         Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana", "Hip " +
                 "opener", "Opens hip joint", "");
         String id = entry.getID();
@@ -63,7 +63,7 @@ class DatabaseTest {
     }
 
     @Test
-    void getEntries() throws SQLException, ClassNotFoundException {
+    void getEntries() {
         addDummyEntry();
         addDummyEntry();
 
