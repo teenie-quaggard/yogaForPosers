@@ -18,12 +18,11 @@ public class Database {
 
 
     public Database(){
-        this(PRODUCTION_CONNECTION_STRING, new Console());
+        this(PRODUCTION_CONNECTION_STRING);
     }
 
-    public Database(String connectionString, IO ioType){
+    public Database(String connectionString){
         this.connectionString = connectionString;
-        this.ioType = ioType;
     }
 
     public void connect() {
@@ -41,11 +40,11 @@ public class Database {
     public void createTable() {
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE yogaPoses(id text, " +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS yogaPoses(id " +
+                    "text, " +
                     "englishName text, sanskritName text, poseType text, " +
                     "healthBenefits text, imgURL text, primary key(id));");
         } catch (SQLException e){
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -67,7 +66,6 @@ public class Database {
                             sanskritName + "', '" + poseType + "', '" + healthBenefits + "', '" + imgURL + "');");
             statement.close();
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -96,7 +94,6 @@ public class Database {
                 entryResults.add(entry);
             }
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
         return entryResults;
@@ -125,7 +122,6 @@ public class Database {
             statement.close();
             return resultList;
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
         return resultList;
@@ -137,18 +133,7 @@ public class Database {
             statement.execute("DELETE FROM yogaPoses;");
             statement.close();
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
-        }
-    }
-
-    public void dropTable() {
-        try {
-            Statement statement = connection.createStatement();
-            statement.execute("DROP TABLE yogaPoses;");
-            statement.close();
-        } catch (Exception e) {
-            ioType.print("Error: " + e);
         }
     }
 
@@ -156,7 +141,6 @@ public class Database {
         try{
             connection.close();
         }  catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }

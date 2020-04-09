@@ -3,17 +3,11 @@
  */
 package space.jaggard.yogaforposers;
 
-import space.jaggard.yogaforposers.database.Database;
 import space.jaggard.yogaforposers.program.Program;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class App {
 
     public static void main(String[] args) {
-
-
         Program program = new Program();
         program.go();
     }

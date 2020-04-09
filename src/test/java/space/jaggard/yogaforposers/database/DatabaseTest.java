@@ -2,7 +2,6 @@ package space.jaggard.yogaforposers.database;
 
 import org.junit.jupiter.api.*;
 import space.jaggard.yogaforposers.entry.Entry;
-import space.jaggard.yogaforposers.testConsole.TestConsole;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,14 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DatabaseTest {
 
-
     private static Database database;
     private static Connection connection;
 
     @BeforeAll
     private static void connectToTestDB() {
-        TestConsole console = new TestConsole(null);
-        database = new Database(Database.TEST_CONNECTION_STRING, console);
+        database = new Database(Database.TEST_CONNECTION_STRING);
         database.connect();
         database.createTable();
     }
@@ -31,11 +28,10 @@ class DatabaseTest {
 
     @AfterAll
     private static void endTestDB() {
-        database.dropTable();
         database.closeConnection();
     }
 
-    void addDummyEntry() throws SQLException, ClassNotFoundException {
+    void addDummyEntry() {
         Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana", "Hip " +
                 "opener", "Opens hip joint", "");
 
@@ -49,7 +45,7 @@ class DatabaseTest {
     }
 
     @Test
-    void getEntry() throws SQLException, ClassNotFoundException {
+    void getEntry() {
         Entry entry = new Entry("Pigeon Pose", "Eka Pada Rajakapotasana", "Hip " +
                 "opener", "Opens hip joint", "");
         String id = entry.getID();
@@ -63,7 +59,7 @@ class DatabaseTest {
     }
 
     @Test
-    void getEntries() throws SQLException, ClassNotFoundException {
+    void getEntries() {
         addDummyEntry();
         addDummyEntry();
 
