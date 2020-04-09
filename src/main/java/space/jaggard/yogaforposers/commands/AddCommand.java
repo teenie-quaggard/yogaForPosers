@@ -15,10 +15,10 @@ public class AddCommand {
         this.ioType = ioType;
     }
 
-    public void handleAdd(ArrayList<Entry> data){
+    public Entry handleAdd(){
         outputMessage(Messages.ADD_PROMPT);
-        Entry entry = createEntry();
-        addEntryToData(entry, data);
+        return createEntry();
+        //addEntryToData(entry, data);
     }
 
     public Entry createEntry(){

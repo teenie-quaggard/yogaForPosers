@@ -13,12 +13,12 @@ public class Entry {
 
     public Entry(String englishName, String sanskritName, String poseType,
           String healthBenefits, String imgURL){
+        this.id = UUID.randomUUID();
         this.englishName = englishName;
         this.sanskritName = sanskritName;
         this.poseType = poseType;
         this.healthBenefits = healthBenefits;
         this.imgURL = imgURL;
-        this.id = UUID.randomUUID();
     }
 
     public String stringify(){

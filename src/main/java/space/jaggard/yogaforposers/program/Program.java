@@ -78,7 +78,8 @@ public class Program {
 
     public void handleAdd(){
         AddCommand addCommand = new AddCommand(ioType);
-        addCommand.handleAdd(data);
+        Entry entry = addCommand.handleAdd();
+        db.addEntry(entry);
         listData();
     }
 
