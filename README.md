@@ -60,8 +60,11 @@ If using Gradle, use the command ```./gradlew test``` while within the root
 - Project lacks testing for randomized UUID (used as Entry ID) - this can
  potentially be side-stepped by refactoring and instead using a static Counter
   class to create unique IDs which are more human readable than UUID
-- Database is not rebuilding between tests
-- Database is not yet connected to app as a whole
+- Database is not yet connected to edit and delete commands, which throws
+ errors when the test suite is run. 
+- Using an in memory DB for testing
+- Potentially implementing JDBI with Maven for better abstraction of the
+ database
 
  ## Things I learned
  - How to implement the [Maven Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
@@ -79,6 +82,10 @@ If using Gradle, use the command ```./gradlew test``` while within the root
     to store them as strings.
 - The refactor tool in IntelliJ is indispensable! 
 - The difference between private and public methods 
+- How to set up and destroy a database between tests
+- That I should try to never return null in the case of databases
+- Understanding the flow of db set up - connection, table creation, db
+ functionality, db disconnection
  
  ## Things I struggled with
 - Implementing a design that stays within the scope of the stories, but is
@@ -95,3 +102,6 @@ If using Gradle, use the command ```./gradlew test``` while within the root
 
 - Adding the JBDC driver to the gradle build file
 - Null pointer error when working with a database
+
+- Database configuration 
+- Setting up and wiping a db table between tests 
