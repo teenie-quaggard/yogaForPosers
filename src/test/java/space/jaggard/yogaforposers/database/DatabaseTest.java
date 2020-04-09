@@ -31,7 +31,6 @@ class DatabaseTest {
 
     @AfterAll
     private static void endTestDB() {
-        database.dropTable();
         database.closeConnection();
     }
 

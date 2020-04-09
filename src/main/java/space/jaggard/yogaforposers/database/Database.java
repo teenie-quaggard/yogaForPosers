@@ -41,7 +41,8 @@ public class Database {
     public void createTable() {
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE yogaPoses(id text, " +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS yogaPoses(id " +
+                    "text, " +
                     "englishName text, sanskritName text, poseType text, " +
                     "healthBenefits text, imgURL text, primary key(id));");
         } catch (SQLException e){
@@ -139,16 +140,6 @@ public class Database {
         } catch (Exception e) {
             ioType.print("Error: " + e);
             e.printStackTrace();
-        }
-    }
-
-    public void dropTable() {
-        try {
-            Statement statement = connection.createStatement();
-            statement.execute("DROP TABLE yogaPoses;");
-            statement.close();
-        } catch (Exception e) {
-            ioType.print("Error: " + e);
         }
     }
 
