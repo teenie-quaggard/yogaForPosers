@@ -23,7 +23,7 @@ class EditCommandTest {
         ArrayList<String> input = new ArrayList<>(Arrays.asList("Y", "1", "New title"));
         TestConsole console = new TestConsole(input);
         Program program = new Program(console, entries,
-                new Database(Database.TEST_CONNECTION_STRING, console));
+                new Database(Database.TEST_CONNECTION_STRING));
         EditCommand editCommand = new EditCommand(console);
 
         editCommand.edit("1", entries);

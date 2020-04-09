@@ -18,8 +18,7 @@ class DatabaseTest {
 
     @BeforeAll
     private static void connectToTestDB() {
-        TestConsole console = new TestConsole(null);
-        database = new Database(Database.TEST_CONNECTION_STRING, console);
+        database = new Database(Database.TEST_CONNECTION_STRING);
         database.connect();
         database.createTable();
     }

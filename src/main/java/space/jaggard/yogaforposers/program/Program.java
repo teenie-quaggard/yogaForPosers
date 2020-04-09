@@ -18,8 +18,7 @@ public class Program {
 
     public Program(){
        this(new Console(), new ArrayList<>(),
-               new Database(Database.PRODUCTION_CONNECTION_STRING,
-                       new Console()));
+               new Database(Database.PRODUCTION_CONNECTION_STRING));
     }
 
     public Program(IO ioType, ArrayList<Entry> data, Database db){
@@ -30,9 +29,8 @@ public class Program {
     }
 
     public void go(){
-        outputMessage(Messages.GREETING);
-        outputMessage(Messages.INTRO);
-
+        connectDB();
+        welcomeUser();
         while (running) {
             tick();
         }
@@ -86,7 +84,8 @@ public class Program {
 
     public void listData() {
         ListCommand listCommand = new ListCommand(ioType);
-        listCommand.listData(data);
+        ArrayList<Entry> savedEntries = db.getEntries();
+        listCommand.listData(savedEntries);
     }
 
     public void editEntry(String userInput){
@@ -111,6 +110,16 @@ public class Program {
 
     public Entry getEntryFromData(int index){
         return data.get(index);
+    }
+
+    private void connectDB(){
+        db.connect();
+        db.createTable();
+    }
+
+    private void welcomeUser(){
+        outputMessage(Messages.GREETING);
+        outputMessage(Messages.INTRO);
     }
 
     private String[] parse(String userInput){

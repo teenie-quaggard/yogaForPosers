@@ -18,12 +18,11 @@ public class Database {
 
 
     public Database(){
-        this(PRODUCTION_CONNECTION_STRING, new Console());
+        this(PRODUCTION_CONNECTION_STRING);
     }
 
-    public Database(String connectionString, IO ioType){
+    public Database(String connectionString){
         this.connectionString = connectionString;
-        this.ioType = ioType;
     }
 
     public void connect() {
@@ -46,7 +45,6 @@ public class Database {
                     "englishName text, sanskritName text, poseType text, " +
                     "healthBenefits text, imgURL text, primary key(id));");
         } catch (SQLException e){
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -68,7 +66,6 @@ public class Database {
                             sanskritName + "', '" + poseType + "', '" + healthBenefits + "', '" + imgURL + "');");
             statement.close();
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -97,7 +94,6 @@ public class Database {
                 entryResults.add(entry);
             }
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
         return entryResults;
@@ -126,7 +122,6 @@ public class Database {
             statement.close();
             return resultList;
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
         return resultList;
@@ -138,7 +133,6 @@ public class Database {
             statement.execute("DELETE FROM yogaPoses;");
             statement.close();
         } catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -147,7 +141,6 @@ public class Database {
         try{
             connection.close();
         }  catch (Exception e) {
-            ioType.print("Error: " + e);
             e.printStackTrace();
         }
     }
